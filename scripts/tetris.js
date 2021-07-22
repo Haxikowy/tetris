@@ -11,6 +11,9 @@ const rand = (max) => {
 }
 
 const gameLoop = () => {
+  if (game.gameOver) {
+    return
+  }
   // add new falling block if there isn't any
   if (game.fallingBlock === null) {
     const newBlock = new Block(ctx, rand(7), rand(4));
@@ -25,6 +28,7 @@ const gameLoop = () => {
 gameLoop();
 
 window.addEventListener('keydown', e => {
+  console.log(e.key);
   switch (e.key) {
     case 'ArrowLeft':
       game.moveSide(false);
@@ -37,6 +41,10 @@ window.addEventListener('keydown', e => {
       break;
     case 'ArrowUp':
       game.rotate();
+      break;
+    case ' ': // TODO add gameover functionality
+      game.gameOver = false;
+      gameLoop();
       break;
   }
 });

@@ -4,6 +4,7 @@ class Game {
     this.fallingBlock = null;
 
     this.makeGameGrid();
+    this.gameOver = true;
   }
 
   makeGameGrid() {
@@ -83,6 +84,16 @@ class Game {
           }
         })
       })
+      // check for game over
+      // TODO do it properly
+      if (y === 0) {
+        for (var i = 0; i < gridRows; i++) {
+          for (var j = 0; j < gridCols; j++) {
+            this.grid[i][j] = 0;
+            this.gameOver = true;
+          }
+        }
+      }
 
       this.fallingBlock = null;
       return
