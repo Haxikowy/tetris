@@ -5,7 +5,7 @@ class Block {
     this.rotation = rotation;
 
     this.y = 0;
-    this.x = Math.floor(gridCols / 2);
+    this.x = Math.floor(gridCols / 2) - 2;
     this.decodeShape();
   }
   // this function decodes shape
@@ -30,7 +30,7 @@ class Block {
       row.map((cell, j) => {
         if (cell > 0) {
           this.ctx.fillStyle = blockShapes[this.blockShape].color;
-          this.ctx.fillRect((this.x - 2 + j) * blockLength, (this.y + i) * blockLength, blockLength, blockLength);
+          this.ctx.fillRect((this.x + j) * blockLength, (this.y + i) * blockLength, blockLength, blockLength);
         }
       })
     })

@@ -11,19 +11,20 @@ const rand = (max) => {
 }
 
 const gameLoop = () => {
+  // add new falling block if there isn't any
   if (game.fallingBlock === null) {
     const newBlock = new Block(ctx, rand(7), rand(4));
     game.fallingBlock = newBlock;
   }
-  game.drawGameState();
   game.moveDown();
+  game.drawGameState();
+  // TODO add 'level acceleration' after gaining some score
   setTimeout(gameLoop, 1000);
 }
 
 gameLoop();
 
 window.addEventListener('keydown', e => {
-  console.log(e.key)
   switch (e.key) {
     case 'ArrowLeft':
       game.moveSide(false);

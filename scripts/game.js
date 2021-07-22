@@ -17,10 +17,31 @@ class Game {
     return this.grid;
   }
 
-  collision(x, y, shape) {
-    this.fallingBlock.shape.map(
-
-    )
+  collision(x, y, candidate = null) {
+    const shape = candidate || this.fallingBlock.shape;
+    const n = shape.length;
+    // loop through current piece shape
+    for (var i = 0; i < n; i++) {
+      for (var j = 0; j < n; j++) {
+        // do next instructions only for
+        // shape 'taken' squares
+        if (shape[i][j] > 0) {
+          const p = x + j;
+          const q = y + i;
+          // check if cell is in grid field
+          if (p >= 0 && p < gridCols && q < gridRows) {
+            // check if it's taken already
+            if (this.grid[q][p] > 0) {
+              return true;
+            }
+          } else {
+            // if it's not in grid field
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   drawGameState() {
@@ -46,7 +67,26 @@ class Game {
   }
 
   moveDown() {
-    if (this.fallingBlock !== null) {
+    if (this.fallingBlock === null) {
+      this.drawGameState();
+      return
+    } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y + 1)) {
+      const shape = this.fallingBlock.shape;
+      const x = this.fallingBlock.x;
+      const y = this.fallingBlock.y;
+      shape.map((row, i) => {
+        row.map((cell, j) => {
+          let p = x + j;
+          let q = y + i;
+          if (p >= 0 && p < gridCols && q < gridRows && cell > 0) {
+            this.grid[q][p] = shape[i][j]
+          }
+        })
+      })
+
+      this.fallingBlock = null;
+      return
+    } else {
       this.fallingBlock.y += 1;
     }
     this.drawGameState();
