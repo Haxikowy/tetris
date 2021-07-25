@@ -25,10 +25,7 @@ const gameLoop = () => {
   setTimeout(gameLoop, 1000);
 }
 
-gameLoop();
-
 window.addEventListener('keydown', e => {
-  console.log(e.key);
   switch (e.key) {
     case 'ArrowLeft':
       game.moveSide(false);

@@ -65,6 +65,9 @@ class Game {
     if (this.fallingBlock !== null) {
       this.fallingBlock.renderBlock();
     }
+    // check if there is winning lane
+    this.checkLines();
+
   }
 
   moveDown() {
@@ -104,7 +107,10 @@ class Game {
   }
 
   moveSide(right) {
-    if (right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
+    if (this.fallingBlock === null) {
+      this.drawGameState();
+      return
+    } else if (right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
       this.drawGameState();
       return
     } else if (right && !this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
@@ -120,14 +126,26 @@ class Game {
     }
   }
   rotate() {
-    this.fallingBlock.rotation += 1;
-    this.fallingBlock.decodeShape();
-    this.drawGameState();
-    if (this.fallingBlock.rotation > 3) {
-      this.fallingBlock.rotation = 0;
+    if (this.fallingBlock === null) {
+      this.drawGameState();
+      return
+    } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
+      this.drawGameState();
+      return
+    } else {
+      this.fallingBlock.rotation += 1;
       this.fallingBlock.decodeShape();
       this.drawGameState();
     }
   }
-
+  checkLines() {
+    let winningLane = false;
+    for (var i = 0; i < this.grid.length; i++) {
+      winningLane = this.grid[i].every(v => v > 0);
+      if (winningLane) {
+        this.grid.splice(i, 1)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      }
+    }
+  }
 }
