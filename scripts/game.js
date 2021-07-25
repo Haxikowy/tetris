@@ -104,10 +104,17 @@ class Game {
   }
 
   moveSide(right) {
-    if (right) {
+    if (right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
+      this.drawGameState();
+      return
+    } else if (right && !this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
       this.fallingBlock.x += 1;
       this.drawGameState();
-    } else if (!right) {
+      return
+    } else if (!right && this.collision(this.fallingBlock.x - 1, this.fallingBlock.y)) {
+      this.drawGameState();
+      return
+    } else if (!right && !this.collision(this.fallingBlock.x - 1, this.fallingBlock.y)) {
       this.fallingBlock.x -= 1;
       this.drawGameState();
     }
