@@ -5,6 +5,7 @@ if (canvas.getContext) {
   var ctx = canvas.getContext('2d');
 }
 const game = new Game(ctx);
+let level = 1000;
 
 const rand = (max) => {
   return Math.floor((Math.random() * max));
@@ -22,10 +23,11 @@ const gameLoop = () => {
   game.moveDown();
   game.drawGameState();
   // TODO add 'level acceleration' after gaining some score
-  setTimeout(gameLoop, 1000);
+  setTimeout(gameLoop, level);
 }
 
 window.addEventListener('keydown', e => {
+  console.log(e.key);
   switch (e.key) {
     case 'ArrowLeft':
       game.moveSide(false);
@@ -42,6 +44,14 @@ window.addEventListener('keydown', e => {
     case ' ': // TODO add gameover functionality
       game.gameOver = false;
       gameLoop();
+      break;
+    case '+':
+      level -= 20;
+      console.log(level);
+      break;
+    case '-':
+      level += 20;
+      console.log(level);
       break;
   }
 });
