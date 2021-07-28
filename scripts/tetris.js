@@ -5,7 +5,6 @@ if (canvas.getContext) {
   var ctx = canvas.getContext('2d');
 }
 const game = new Game(ctx);
-let level = 1000;
 
 const rand = (max) => {
   return Math.floor((Math.random() * max));
@@ -22,8 +21,9 @@ const gameLoop = () => {
   }
   game.moveDown();
   game.drawGameState();
-  // TODO add 'level acceleration' after gaining some score
-  setTimeout(gameLoop, level);
+  console.log(game.level);
+
+  setTimeout(gameLoop, levelArray[game.level]);
 }
 
 window.addEventListener('keydown', e => {
@@ -37,6 +37,7 @@ window.addEventListener('keydown', e => {
       break;
     case 'ArrowDown':
       game.moveDown();
+      game.score++
       break;
     case 'ArrowUp':
       game.rotate();
@@ -46,12 +47,12 @@ window.addEventListener('keydown', e => {
       gameLoop();
       break;
     case '+':
-      level -= 20;
-      console.log(level);
+      game.level++;
+      console.log(levelArray[game.level]);
       break;
     case '-':
-      level += 20;
-      console.log(level);
+      game.level--;
+      console.log(levelArray[game.level]);
       break;
   }
 });

@@ -5,6 +5,8 @@ class Game {
 
     this.makeGameGrid();
     this.gameOver = true;
+    this.score = 0; //inital score by every new game is 0
+    this.level = 17; //default level is 0
   }
 
   makeGameGrid() {

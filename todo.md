@@ -10,12 +10,7 @@
    - score,[x]
    - his current level,[x]
 
-# BONUS
-
-- Add multiplayer,[x]
-- Add AI vs mode,[x]
-
-# Scoring system
+## Scoring system
 
 There is a scoring system based on how many lines in one time you clear.
 Also if you press move down button score will increase by 1 point.
@@ -35,6 +30,12 @@ Also if you press move down button score will increase by 1 point.
 | n     | 40 \* (n + 1)     | 100 \* (n + 1)     | 300 \* (n + 1)     | 1200 \* (n + 1)    |
 | ----- | ----------------- | ------------------ | ------------------ | ------------------ |
 
-# Level system
+## Level system
 
-Basiclly level will control how fast paced game is.
+Basiclly level will control how fast paced game is. I found on wikipedia that Tetris(NES, Nintendo) was running on ~50 fps, so I calculated how fast game need to call gameloop to get the same effect. (example:
+on level 0 game runs 50fps and it takes 36 frames to move down block, so i divided 36 by 50 and i got that it takes 0.76 of whole fps so it means that it takes 0.76 of second to moveDown etc.)
+
+# BONUS
+
+- Add multiplayer,[x]
+- Add AI vs mode,[x]
