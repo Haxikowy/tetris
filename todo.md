@@ -35,7 +35,46 @@ Also if you press move down button score will increase by 1 point.
 Basiclly level will control how fast paced game is. I found on wikipedia that Tetris(NES, Nintendo) was running on ~50 fps, so I calculated how fast game need to call gameloop to get the same effect. (example:
 on level 0 game runs 50fps and it takes 36 frames to move down block, so i divided 36 by 50 and i got that it takes 0.76 of whole fps so it means that it takes 0.76 of second to moveDown etc.)
 
+To advance in level you need to clear amount of lines according to the formula: (startLevel * 10 +10) (eg from 1 to 2, 1*10+10=20 lines cleared to get level 2 from level 1).
+
 # BONUS
 
 - Add multiplayer,[x]
 - Add AI vs mode,[x]
+
+````js
+let twoCombo = this.grid[i + 1].every(v => v > 0);
+let threeCombo = this.grid[i + 2].every(v => v > 0);
+let fourCombo = this.grid[i + 3].every(v => v > 0);
+
+      if (winningLine && twoCombo && threeCombo && fourCombo) {
+        let addScore = 1200 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 4;
+
+        this.grid.splice(i, 4)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        return
+      } else if (winningLine && twoCombo && threeCombo) {
+        let addScore = 300 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 3;
+
+        this.grid.splice(i, 3)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+        return
+      } else if (winningLine && twoCombo) {
+        let addScore = 100 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 2;
+
+        this.grid.splice(i, 2)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        return
+      }
+      ```
+````

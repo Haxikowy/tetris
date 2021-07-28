@@ -6,7 +6,8 @@ class Game {
     this.makeGameGrid();
     this.gameOver = true;
     this.score = 0; //inital score by every new game is 0
-    this.level = 17; //default level is 0
+    this.level = 0; //default level is 0
+    this.lineCleared = 0; //inital lines cleared set to 0
   }
 
   makeGameGrid() {
@@ -70,6 +71,8 @@ class Game {
     // check if there is winning lane
     this.checkLines();
 
+    // check if you need to speed up game
+    this.checkLevel();
   }
 
   moveDown() {
@@ -141,13 +144,32 @@ class Game {
     }
   }
   checkLines() {
-    let winningLane = false;
+    let winningLine = false;
     for (var i = 0; i < this.grid.length; i++) {
-      winningLane = this.grid[i].every(v => v > 0);
-      if (winningLane) {
+      winningLine = this.grid[i].every(v => v > 0);
+
+
+      if (winningLine) {
+        let addScore = 40 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared++
+
         this.grid.splice(i, 1)
         this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
       }
+    }
+  }
+  checkLevel() {
+    let levelCheck = this.level * 10 + 10;
+    if (this.lineCleared >= levelCheck) {
+      this.level++
+    }
+  }
+  handleGameOver() {
+    if (this.gameOver) {
+      this.score = 0;
+      this.level = 0;
+      this.lineCleared = 0;
     }
   }
 }

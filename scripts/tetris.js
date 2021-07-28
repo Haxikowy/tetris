@@ -12,6 +12,7 @@ const rand = (max) => {
 
 const gameLoop = () => {
   if (game.gameOver) {
+    game.handleGameOver();
     return
   }
   // add new falling block if there isn't any
@@ -21,13 +22,14 @@ const gameLoop = () => {
   }
   game.moveDown();
   game.drawGameState();
-  console.log(game.level);
+  console.log('level ', game.level);
+  console.log('cleared ', game.lineCleared);
+  console.log('score ', game.score);
 
   setTimeout(gameLoop, levelArray[game.level]);
 }
 
 window.addEventListener('keydown', e => {
-  console.log(e.key);
   switch (e.key) {
     case 'ArrowLeft':
       game.moveSide(false);
