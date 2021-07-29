@@ -47,7 +47,7 @@ let twoCombo = this.grid[i + 1].every(v => v > 0);
 let threeCombo = this.grid[i + 2].every(v => v > 0);
 let fourCombo = this.grid[i + 3].every(v => v > 0);
 
-      if (winningLine && twoCombo && threeCombo && fourCombo) {
+      if (threeCombo && fourCombo) {
         let addScore = 1200 * (this.level + 1);
         this.score += addScore;
         this.lineCleared += 4;
@@ -58,7 +58,7 @@ let fourCombo = this.grid[i + 3].every(v => v > 0);
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         return
-      } else if (winningLine && twoCombo && threeCombo) {
+      } else if (twoCombo && threeCombo) {
         let addScore = 300 * (this.level + 1);
         this.score += addScore;
         this.lineCleared += 3;

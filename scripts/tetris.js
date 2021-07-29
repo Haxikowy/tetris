@@ -22,9 +22,6 @@ const gameLoop = () => {
   }
   game.moveDown();
   game.drawGameState();
-  console.log('level ', game.level);
-  console.log('cleared ', game.lineCleared);
-  console.log('score ', game.score);
 
   setTimeout(gameLoop, levelArray[game.level]);
 }
@@ -55,6 +52,11 @@ window.addEventListener('keydown', e => {
     case '-':
       game.level--;
       console.log(levelArray[game.level]);
+      break;
+    case 'i':
+      console.log('level ', game.level);
+      console.log('cleared ', game.lineCleared);
+      console.log('score ', game.score);
       break;
   }
 });

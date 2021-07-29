@@ -145,17 +145,61 @@ class Game {
   }
   checkLines() {
     let winningLine = false;
+    var twoCombo = false;
+    var threeCombo = false;
+    var fourCombo = false;
     for (var i = 0; i < this.grid.length; i++) {
       winningLine = this.grid[i].every(v => v > 0);
+      if (this.grid[i + 1] !== undefined) {
+        twoCombo = this.grid[i + 1].every(v => v > 0);
+      }
+      if (this.grid[i + 2] !== undefined) {
+        threeCombo = this.grid[i + 2].every(v => v > 0);
+      }
+      if (this.grid[i + 3] !== undefined) {
+        fourCombo = this.grid[i + 3].every(v => v > 0);
+      }
 
+      if (winningLine && twoCombo && threeCombo && fourCombo) {
+        let addScore = 1200 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 4;
+        console.log('adding', addScore);
 
-      if (winningLine) {
+        this.grid.splice(i, 4)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        return
+      } else if (winningLine && twoCombo && threeCombo) {
+        let addScore = 300 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 3;
+        console.log('adding', addScore);
+
+        this.grid.splice(i, 3)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+        return
+      } else if (winningLine && twoCombo) {
+        let addScore = 100 * (this.level + 1);
+        this.score += addScore;
+        this.lineCleared += 2;
+        console.log('adding', addScore);
+
+        this.grid.splice(i, 2)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        return
+      } else if (winningLine) {
         let addScore = 40 * (this.level + 1);
         this.score += addScore;
         this.lineCleared++
+        console.log('adding', addScore);
 
         this.grid.splice(i, 1)
         this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        return
       }
     }
   }
