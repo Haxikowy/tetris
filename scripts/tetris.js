@@ -1,8 +1,8 @@
-const canvas = document.getElementById('game-window');
+const gameCanvas = document.getElementById('game-window');
 
 // check for browser support
-if (canvas.getContext) {
-  var ctx = canvas.getContext('2d');
+if (gameCanvas.getContext) {
+  var ctx = gameCanvas.getContext('2d');
 }
 const game = new Game(ctx);
 
@@ -20,8 +20,17 @@ const gameLoop = () => {
     const newBlock = new Block(ctx, rand(7), rand(4));
     game.fallingBlock = newBlock;
   }
+  // move block down
   game.moveDown();
+
+  // draw gameGrid
   game.drawGameState();
+
+  // check if there is winning lane
+  game.checkLines();
+
+  // check if you need to speed up game
+  game.checkLevel();
 
   setTimeout(gameLoop, levelArray[game.level]);
 }

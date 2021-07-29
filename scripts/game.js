@@ -68,11 +68,8 @@ class Game {
     if (this.fallingBlock !== null) {
       this.fallingBlock.renderBlock();
     }
-    // check if there is winning lane
-    this.checkLines();
 
-    // check if you need to speed up game
-    this.checkLevel();
+    this.checkLines();
   }
 
   moveDown() {
@@ -144,63 +141,54 @@ class Game {
     }
   }
   checkLines() {
-    let winningLine = false;
-    var twoCombo = false;
-    var threeCombo = false;
-    var fourCombo = false;
-    for (var i = 0; i < this.grid.length; i++) {
-      winningLine = this.grid[i].every(v => v > 0);
-      if (this.grid[i + 1] !== undefined) {
-        twoCombo = this.grid[i + 1].every(v => v > 0);
+    var linesState = [];
+    let lineIndex = [];
+    // create array of booleans if line is full then return true
+    // else return false
+    for (var i = 0; i < gridRows; i++) {
+      let lineState = this.grid[i].every(v => v > 0);
+      linesState.push(lineState);
+    }
+
+    // get all indexes of true statements
+    // and save it to array of indexes
+    linesState.forEach((e, i) => {
+      if (e === true) {
+        lineIndex.push(i);
       }
-      if (this.grid[i + 2] !== undefined) {
-        threeCombo = this.grid[i + 2].every(v => v > 0);
-      }
-      if (this.grid[i + 3] !== undefined) {
-        fourCombo = this.grid[i + 3].every(v => v > 0);
-      }
+    })
 
-      if (winningLine && twoCombo && threeCombo && fourCombo) {
-        let addScore = 1200 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 4;
-        console.log('adding', addScore);
+    // check if there is any winning lane
+    // and if there are loop through them and
+    // blank them
+    if (lineIndex.length > 0) {
+      lineIndex.forEach((e) => {
+        this.grid.splice(e, 1)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      })
+    }
 
-        this.grid.splice(i, 4)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      } else if (winningLine && twoCombo && threeCombo) {
-        let addScore = 300 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 3;
-        console.log('adding', addScore);
+    // handle score statements -> more in todo.md
+    if (lineIndex.length === 4) {
+      let addScore = 1200 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 4;
 
-        this.grid.splice(i, 3)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    } else if (lineIndex.length === 3) {
+      let addScore = 300 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 3;
 
-        return
-      } else if (winningLine && twoCombo) {
-        let addScore = 100 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 2;
-        console.log('adding', addScore);
+    } else if (lineIndex.length === 2) {
+      let addScore = 100 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 2;
 
-        this.grid.splice(i, 2)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      } else if (winningLine) {
-        let addScore = 40 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared++
-        console.log('adding', addScore);
+    } else if (lineIndex.length === 1) {
+      let addScore = 40 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared++
 
-        this.grid.splice(i, 1)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      }
     }
   }
   checkLevel() {
