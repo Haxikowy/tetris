@@ -5,6 +5,9 @@ class Game {
 
     this.makeGameGrid();
     this.gameOver = true;
+    this.score = 0; //inital score by every new game is 0
+    this.level = 0; //default level is 0
+    this.lineCleared = 0; //inital lines cleared set to 0
   }
 
   makeGameGrid() {
@@ -65,9 +68,8 @@ class Game {
     if (this.fallingBlock !== null) {
       this.fallingBlock.renderBlock();
     }
-    // check if there is winning lane
-    this.checkLines();
 
+    this.checkLines();
   }
 
   moveDown() {
@@ -139,13 +141,67 @@ class Game {
     }
   }
   checkLines() {
-    let winningLane = false;
-    for (var i = 0; i < this.grid.length; i++) {
-      winningLane = this.grid[i].every(v => v > 0);
-      if (winningLane) {
-        this.grid.splice(i, 1)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    var linesState = [];
+    let lineIndex = [];
+    // create array of booleans if line is full then return true
+    // else return false
+    for (var i = 0; i < gridRows; i++) {
+      let lineState = this.grid[i].every(v => v > 0);
+      linesState.push(lineState);
+    }
+
+    // get all indexes of true statements
+    // and save it to array of indexes
+    linesState.forEach((e, i) => {
+      if (e === true) {
+        lineIndex.push(i);
       }
+    })
+
+    // check if there is any winning lane
+    // and if there are loop through them and
+    // blank them
+    if (lineIndex.length > 0) {
+      lineIndex.forEach((e) => {
+        this.grid.splice(e, 1)
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      })
+    }
+
+    // handle score statements -> more in todo.md
+    if (lineIndex.length === 4) {
+      let addScore = 1200 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 4;
+
+    } else if (lineIndex.length === 3) {
+      let addScore = 300 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 3;
+
+    } else if (lineIndex.length === 2) {
+      let addScore = 100 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared += 2;
+
+    } else if (lineIndex.length === 1) {
+      let addScore = 40 * (this.level + 1);
+      this.score += addScore;
+      this.lineCleared++
+
+    }
+  }
+  checkLevel() {
+    let levelCheck = this.level * 10 + 10;
+    if (this.lineCleared >= levelCheck) {
+      this.level++
+    }
+  }
+  handleGameOver() {
+    if (this.gameOver) {
+      this.score = 0;
+      this.level = 0;
+      this.lineCleared = 0;
     }
   }
 }

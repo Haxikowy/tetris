@@ -1,8 +1,8 @@
-const canvas = document.getElementById('game-window');
+const gameCanvas = document.getElementById('game-window');
 
 // check for browser support
-if (canvas.getContext) {
-  var ctx = canvas.getContext('2d');
+if (gameCanvas.getContext) {
+  var ctx = gameCanvas.getContext('2d');
 }
 const game = new Game(ctx);
 
@@ -12,6 +12,7 @@ const rand = (max) => {
 
 const gameLoop = () => {
   if (game.gameOver) {
+    game.handleGameOver();
     return
   }
   // add new falling block if there isn't any
@@ -19,10 +20,19 @@ const gameLoop = () => {
     const newBlock = new Block(ctx, rand(7), rand(4));
     game.fallingBlock = newBlock;
   }
+  // move block down
   game.moveDown();
+
+  // draw gameGrid
   game.drawGameState();
-  // TODO add 'level acceleration' after gaining some score
-  setTimeout(gameLoop, 1000);
+
+  // check if there is winning lane
+  game.checkLines();
+
+  // check if you need to speed up game
+  game.checkLevel();
+
+  setTimeout(gameLoop, levelArray[game.level]);
 }
 
 window.addEventListener('keydown', e => {
@@ -35,6 +45,7 @@ window.addEventListener('keydown', e => {
       break;
     case 'ArrowDown':
       game.moveDown();
+      game.score++
       break;
     case 'ArrowUp':
       game.rotate();
@@ -42,6 +53,19 @@ window.addEventListener('keydown', e => {
     case ' ': // TODO add gameover functionality
       game.gameOver = false;
       gameLoop();
+      break;
+    case '+':
+      game.level++;
+      console.log(levelArray[game.level]);
+      break;
+    case '-':
+      game.level--;
+      console.log(levelArray[game.level]);
+      break;
+    case 'i':
+      console.log('level ', game.level);
+      console.log('cleared ', game.lineCleared);
+      console.log('score ', game.score);
       break;
   }
 });
