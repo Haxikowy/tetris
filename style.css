@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
+
+
+:root {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  --white: hsl(0, 0%, 100%);
+}
+
 *,*::before,*::after{
   box-sizing: border-box;
   margin:0;
@@ -9,15 +18,43 @@ body{
 }
 
 .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 100px 0;
   margin: 0 auto;
   width: 80%;
   height: 100vh;
 }
 
+.left-container {
+  width: 100px;
+  height: 610px;
+}
+#nxt-block{
+  display: block;
+  margin: 0 15px 0 auto;
+  background-color: hsl(0, 10%, 5%);
+  border: 5px solid hsl(0, 80%, 20%);
+}
+
 #game-window{
   background-color: hsl(0, 10%, 5%);
   display: block;
   border: 5px solid hsl(0, 80%, 20%);
-  margin: 0 auto;
+}
+
+.right-container{  
+  width: 200px;
+  height: 610px;
+}
+
+.game-state{
+  margin-left: 15px;
+  padding: 10px;
+  border: 5px solid hsl(0, 80%, 20%);
+  background-color:hsl(0, 10%, 5%);
+  font-weight: bold;
+  color: hsl(0, 80%, 70%);
 }

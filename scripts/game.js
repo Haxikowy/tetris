@@ -4,7 +4,7 @@ class Game {
     this.fallingBlock = null;
 
     this.makeGameGrid();
-    this.gameOver = true;
+    this.gameOver = true; //player need to start game
     this.score = 0; //inital score by every new game is 0
     this.level = 0; //default level is 0
     this.lineCleared = 0; //inital lines cleared set to 0
@@ -68,7 +68,7 @@ class Game {
     if (this.fallingBlock !== null) {
       this.fallingBlock.renderBlock();
     }
-
+    // look for winning lines after every draw
     this.checkLines();
   }
 
@@ -90,7 +90,6 @@ class Game {
         })
       })
       // check for game over
-      // TODO do it properly
       if (y === 0) {
         for (var i = 0; i < gridRows; i++) {
           for (var j = 0; j < gridCols; j++) {
@@ -128,10 +127,7 @@ class Game {
     }
   }
   rotate() {
-    if (this.fallingBlock === null) {
-      this.drawGameState();
-      return
-    } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
+    if (this.fallingBlock === null || this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
       this.drawGameState();
       return
     } else {
@@ -195,6 +191,10 @@ class Game {
     let levelCheck = this.level * 10 + 10;
     if (this.lineCleared >= levelCheck) {
       this.level++
+    }
+
+    if (this.level > 19 && levelArray[this.level] === undefined) {
+      levelArray.push(20)
     }
   }
   handleGameOver() {

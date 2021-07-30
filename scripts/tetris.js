@@ -1,8 +1,13 @@
 const gameCanvas = document.getElementById('game-window');
+const nextBlockCanvas = document.getElementById('nxt-block');
+const levelUI = document.querySelector('.level');
+const linesUI = document.querySelector('.lines');
+const scoreUI = document.querySelector('.score');
 
 // check for browser support
 if (gameCanvas.getContext) {
   var ctx = gameCanvas.getContext('2d');
+  var nxtCtx = nextBlockCanvas.getContext('2d');
 }
 const game = new Game(ctx);
 
@@ -32,6 +37,9 @@ const gameLoop = () => {
   // check if you need to speed up game
   game.checkLevel();
 
+  // TODO it's simple update ui function will do it oop in next commit
+  updateUI();
+
   setTimeout(gameLoop, levelArray[game.level]);
 }
 
@@ -51,16 +59,16 @@ window.addEventListener('keydown', e => {
       game.rotate();
       break;
     case ' ': // TODO add gameover functionality
-      game.gameOver = false;
-      gameLoop();
+      if (game.gameOver === true) {
+        game.gameOver = false;
+        gameLoop();
+      }
       break;
     case '+':
       game.level++;
-      console.log(levelArray[game.level]);
       break;
     case '-':
       game.level--;
-      console.log(levelArray[game.level]);
       break;
     case 'i':
       console.log('level ', game.level);
@@ -69,3 +77,9 @@ window.addEventListener('keydown', e => {
       break;
   }
 });
+
+const updateUI = () => {
+  levelUI.textContent = game.level;
+  linesUI.textContent = game.lineCleared;
+  scoreUI.textContent = game.score;
+}

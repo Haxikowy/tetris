@@ -10,8 +10,18 @@
 
 <body>
   <div class="container">
+    <aside class="left-container">
+      <canvas id="nxt-block" width="80" height="80"></canvas>
+    </aside>
     <canvas id="game-window" width="300" height="600">Tetris game window - you should use newer web browser if you see
       it!</canvas>
+    <aside class="right-container">
+      <div class="game-state">
+        <div class="state">Level: <span class="level">0</span></div>
+        <div class="state">Lines cleared: <span class="lines">15</span></div>
+        <div class="state">Score: <span class="score">35033</span></div>
+      </div>
+    </aside>
   </div>
 
   <script src="scripts/constants.js"></script>
