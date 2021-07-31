@@ -1,6 +1,7 @@
 const gridRows = 20;
 const gridCols = 10;
 const blockLength = 30;
+const fps = 1000 / 30;
 
 const blockShapes = [{
   name: 'iShape',

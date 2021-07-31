@@ -15,18 +15,34 @@ const rand = (max) => {
   return Math.floor((Math.random() * max));
 }
 
-const gameLoop = () => {
+
+
+const downTick = () => {
   if (game.gameOver) {
-    game.handleGameOver();
     return
-  }
-  // add new falling block if there isn't any
-  if (game.fallingBlock === null) {
-    const newBlock = new Block(ctx, rand(7), rand(4));
-    game.fallingBlock = newBlock;
   }
   // move block down
   game.moveDown();
+
+  setTimeout(downTick, levelArray[game.level]);
+}
+
+
+const gameLoop = () => {
+  if (game.gameOver) {
+    return
+  }
+
+  // add new falling block if there isn't any
+  if (game.fallingBlock === null) {
+    const currentBlock = new Block(ctx, rand(7), rand(4));
+    game.fallingBlock = currentBlock;
+  }
+
+  if (game.nextFallingBlock === null) {
+    const nextBlock = new Block(ctx, rand(7), rand(4));
+    game.nextFallingBlock = nextBlock;
+  }
 
   // draw gameGrid
   game.drawGameState();
@@ -40,7 +56,7 @@ const gameLoop = () => {
   // TODO it's simple update ui function will do it oop in next commit
   updateUI();
 
-  setTimeout(gameLoop, levelArray[game.level]);
+  setTimeout(gameLoop, fps);
 }
 
 window.addEventListener('keydown', e => {
@@ -53,15 +69,18 @@ window.addEventListener('keydown', e => {
       break;
     case 'ArrowDown':
       game.moveDown();
-      game.score++
+      if (!game.gameOver) {
+        game.score++
+      }
       break;
     case 'ArrowUp':
       game.rotate();
       break;
     case ' ': // TODO add gameover functionality
-      if (game.gameOver === true) {
+      if (game.gameOver) {
         game.gameOver = false;
         gameLoop();
+        downTick();
       }
       break;
     case '+':
@@ -79,7 +98,19 @@ window.addEventListener('keydown', e => {
 });
 
 const updateUI = () => {
+  const nextBlock = game.nextFallingBlock
   levelUI.textContent = game.level;
   linesUI.textContent = game.lineCleared;
   scoreUI.textContent = game.score;
+
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+      if (nextBlock.shape[i][j] > 0) {
+        nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color;
+        nxtCtx.fillRect(j * 20, i * 20, 20, 20);
+      } else {
+        nxtCtx.clearRect(j * 20, i * 20, 20, 20);
+      }
+    }
+  }
 }

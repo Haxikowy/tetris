@@ -2,6 +2,7 @@ class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.fallingBlock = null;
+    this.nextFallingBlock = null;
 
     this.makeGameGrid();
     this.gameOver = true; //player need to start game
@@ -73,7 +74,7 @@ class Game {
   }
 
   moveDown() {
-    if (this.fallingBlock === null) {
+    if (this.fallingBlock === null && this.gameOver) {
       this.drawGameState();
       return
     } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y + 1)) {
@@ -89,17 +90,17 @@ class Game {
           }
         })
       })
+
       // check for game over
       if (y === 0) {
-        for (var i = 0; i < gridRows; i++) {
-          for (var j = 0; j < gridCols; j++) {
-            this.grid[i][j] = 0;
-            this.gameOver = true;
-          }
-        }
+        this.clearGameGrid();
+        this.handleGameOver();
+        this.drawGameState();
       }
 
-      this.fallingBlock = null;
+      // switch between blocks
+      this.fallingBlock = this.nextFallingBlock;
+      this.nextFallingBlock = null;
       return
     } else {
       this.fallingBlock.y += 1;
@@ -197,11 +198,19 @@ class Game {
       levelArray.push(20)
     }
   }
-  handleGameOver() {
-    if (this.gameOver) {
-      this.score = 0;
-      this.level = 0;
-      this.lineCleared = 0;
+  clearGameGrid() {
+    for (var i = 0; i < gridRows; i++) {
+      for (var j = 0; j < gridCols; j++) {
+        this.grid[i][j] = 0;
+      }
     }
+  }
+  handleGameOver() {
+    this.nextFallingBlock = null;
+    this.fallingBlock = null;
+    this.gameOver = true;
+    this.score = 0;
+    this.level = 0;
+    this.lineCleared = 0;
   }
 }
