@@ -9,7 +9,7 @@
    - instruction, how to play etc.,[x]
    - score,[x]
    - his current level,[x]
-6. Add incoming block mechanic[x]
+6. Add incoming block mechanic[v]
 
 ## Scoring system
 

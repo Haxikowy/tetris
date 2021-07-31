@@ -132,7 +132,7 @@ class Game {
       this.drawGameState();
       return
     } else {
-      this.fallingBlock.rotation += 1;
+      this.fallingBlock.rotation++;
       this.fallingBlock.decodeShape();
       this.drawGameState();
     }
@@ -206,11 +206,23 @@ class Game {
     }
   }
   handleGameOver() {
+    this.handleScoreboard();
+
     this.nextFallingBlock = null;
     this.fallingBlock = null;
     this.gameOver = true;
     this.score = 0;
     this.level = 0;
     this.lineCleared = 0;
+  }
+
+  handleScoreboard() {
+    var scoreArr = [];
+    if (localStorage.getItem('scores')) {
+      var storedArr = localStorage.getItem('scores');
+      var scoreArr = JSON.parse(storedArr);
+    }
+    scoreArr.push(this.score);
+    localStorage.setItem("scores", JSON.stringify(scoreArr));
   }
 }

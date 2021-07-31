@@ -58,3 +58,25 @@ body{
   font-weight: bold;
   color: hsl(0, 80%, 70%);
 }
+
+.highscore-container{
+  margin: 15px 0 0 15px;
+  padding: 12px;
+  border: 5px solid hsl(0, 80%, 20%);
+  background-color: hsl(0,10%,5%);
+  color: hsl(0, 80%, 70%);
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.scoreboard{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.3rem;
+  color:hsl(0, 35%, 90%);
+  margin-bottom: 10px;
+}
+
+.highscore{
+  margin-left: 5px;
+}

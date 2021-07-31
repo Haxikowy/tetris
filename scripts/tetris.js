@@ -11,6 +11,8 @@ if (gameCanvas.getContext) {
 }
 const game = new Game(ctx);
 
+updateScoreboard();
+
 const rand = (max) => {
   return Math.floor((Math.random() * max));
 }
@@ -30,6 +32,7 @@ const downTick = () => {
 
 const gameLoop = () => {
   if (game.gameOver) {
+    updateScoreboard();
     return
   }
 
@@ -85,9 +88,11 @@ window.addEventListener('keydown', e => {
       break;
     case '+':
       game.level++;
+      updateUI();
       break;
     case '-':
       game.level--;
+      updateUI();
       break;
     case 'i':
       console.log('level ', game.level);
@@ -98,18 +103,20 @@ window.addEventListener('keydown', e => {
 });
 
 const updateUI = () => {
-  const nextBlock = game.nextFallingBlock
   levelUI.textContent = game.level;
   linesUI.textContent = game.lineCleared;
   scoreUI.textContent = game.score;
 
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-      if (nextBlock.shape[i][j] > 0) {
-        nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color;
-        nxtCtx.fillRect(j * 20, i * 20, 20, 20);
-      } else {
-        nxtCtx.clearRect(j * 20, i * 20, 20, 20);
+  if (!game.gameOver) {
+    const nextBlock = game.nextFallingBlock
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 4; j++) {
+        if (nextBlock.shape[i][j] > 0) {
+          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color;
+          nxtCtx.fillRect(j * 20, i * 20, 20, 20);
+        } else {
+          nxtCtx.clearRect(j * 20, i * 20, 20, 20);
+        }
       }
     }
   }
