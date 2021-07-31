@@ -2,13 +2,14 @@
 
 1. Add score and highscore board -> saving to database (firebase) [x]
 2. Do better graphics, add falling 'shade' [x]
-3. Add score mechanic -> further u are, game gets faster,[x]
+3. Add score mechanic -> further u are, game gets faster,[v]
 4. Add handicap option --- if you wanna start on "1" lvl of handicap 1/10 of gameboard will be filled with blocks,[x]
    --- on lvl "2" 2/10 will be filled ->> and further, max lvl on 7,[x]
 5. Add UI:
    - instruction, how to play etc.,[x]
    - score,[x]
    - his current level,[x]
+6. Add incoming block mechanic[v]
 
 ## Scoring system
 
@@ -41,65 +42,3 @@ To advance in level you need to clear amount of lines according to the formula: 
 
 - Add multiplayer,[x]
 - Add AI vs mode,[x]
-
-````js
-let winningLine = false;
-    var twoCombo = false;
-    var threeCombo = false;
-    var fourCombo = false;
-    for (var i = 0; i < this.grid.length; i++) {
-      winningLine = this.grid[i].every(v => v > 0);
-      if (this.grid[i + 1] != undefined) {
-        twoCombo = this.grid[i + 1].every(v => v > 0);
-      }
-      if (this.grid[i + 2] != undefined) {
-        threeCombo = this.grid[i + 2].every(v => v > 0);
-      }
-      if (this.grid[i + 3] != undefined) {
-        fourCombo = this.grid[i + 3].every(v => v > 0);
-      }
-
-      if (winningLine && twoCombo && threeCombo && fourCombo) {
-        let addScore = 1200 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 4;
-        console.log('adding', addScore);
-
-        this.grid.splice(i, 4)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      } else if (winningLine && twoCombo && threeCombo) {
-        let addScore = 300 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 3;
-        console.log('adding', addScore);
-
-        this.grid.splice(i, 3)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-        return
-      } else if (winningLine && twoCombo) {
-        let addScore = 100 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared += 2;
-        console.log('adding', addScore);
-
-        this.grid.splice(i, 2)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      } else if (winningLine) {
-        let addScore = 40 * (this.level + 1);
-        this.score += addScore;
-        this.lineCleared++
-        console.log('adding', addScore);
-
-        this.grid.splice(i, 1)
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        return
-      }
-    }
-      ```
-````

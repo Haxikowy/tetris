@@ -2,9 +2,10 @@ class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.fallingBlock = null;
+    this.nextFallingBlock = null;
 
     this.makeGameGrid();
-    this.gameOver = true;
+    this.gameOver = true; //player need to start game
     this.score = 0; //inital score by every new game is 0
     this.level = 0; //default level is 0
     this.lineCleared = 0; //inital lines cleared set to 0
@@ -68,12 +69,12 @@ class Game {
     if (this.fallingBlock !== null) {
       this.fallingBlock.renderBlock();
     }
-
+    // look for winning lines after every draw
     this.checkLines();
   }
 
   moveDown() {
-    if (this.fallingBlock === null) {
+    if (this.fallingBlock === null && this.gameOver) {
       this.drawGameState();
       return
     } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y + 1)) {
@@ -89,18 +90,17 @@ class Game {
           }
         })
       })
+
       // check for game over
-      // TODO do it properly
       if (y === 0) {
-        for (var i = 0; i < gridRows; i++) {
-          for (var j = 0; j < gridCols; j++) {
-            this.grid[i][j] = 0;
-            this.gameOver = true;
-          }
-        }
+        this.clearGameGrid();
+        this.handleGameOver();
+        this.drawGameState();
       }
 
-      this.fallingBlock = null;
+      // switch between blocks
+      this.fallingBlock = this.nextFallingBlock;
+      this.nextFallingBlock = null;
       return
     } else {
       this.fallingBlock.y += 1;
@@ -128,14 +128,11 @@ class Game {
     }
   }
   rotate() {
-    if (this.fallingBlock === null) {
-      this.drawGameState();
-      return
-    } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
+    if (this.fallingBlock === null || this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
       this.drawGameState();
       return
     } else {
-      this.fallingBlock.rotation += 1;
+      this.fallingBlock.rotation++;
       this.fallingBlock.decodeShape();
       this.drawGameState();
     }
@@ -196,12 +193,36 @@ class Game {
     if (this.lineCleared >= levelCheck) {
       this.level++
     }
+
+    if (this.level > 19 && levelArray[this.level] === undefined) {
+      levelArray.push(20)
+    }
+  }
+  clearGameGrid() {
+    for (var i = 0; i < gridRows; i++) {
+      for (var j = 0; j < gridCols; j++) {
+        this.grid[i][j] = 0;
+      }
+    }
   }
   handleGameOver() {
-    if (this.gameOver) {
-      this.score = 0;
-      this.level = 0;
-      this.lineCleared = 0;
+    this.handleScoreboard();
+
+    this.nextFallingBlock = null;
+    this.fallingBlock = null;
+    this.gameOver = true;
+    this.score = 0;
+    this.level = 0;
+    this.lineCleared = 0;
+  }
+
+  handleScoreboard() {
+    var scoreArr = [];
+    if (localStorage.getItem('scores')) {
+      var storedArr = localStorage.getItem('scores');
+      var scoreArr = JSON.parse(storedArr);
     }
+    scoreArr.push(this.score);
+    localStorage.setItem("scores", JSON.stringify(scoreArr));
   }
 }

@@ -10,13 +10,37 @@
 
 <body>
   <div class="container">
+    <aside class="left-container">
+      <canvas id="nxt-block" width="80" height="80"></canvas>
+    </aside>
     <canvas id="game-window" width="300" height="600">Tetris game window - you should use newer web browser if you see
       it!</canvas>
+    <aside class="right-container">
+      <div class="game-state">
+        <div class="state">Level: <span class="level">0</span></div>
+        <div class="state">Lines cleared: <span class="lines">0</span></div>
+        <div class="state">Score: <span class="score">0</span></div>
+      </div>
+      <div class="highscore-container">
+        <h1 class="scoreboard">scoreboard</h1>
+        <div class="highscore">1. <span class="h-score"></span></div>
+        <div class="highscore">2. <span class="h-score"></span></div>
+        <div class="highscore">3. <span class="h-score"></span></div>
+        <div class="highscore">4. <span class="h-score"></span></div>
+        <div class="highscore">5. <span class="h-score"></span></div>
+        <div class="highscore">6. <span class="h-score"></span></div>
+        <div class="highscore">7. <span class="h-score"></span></div>
+        <div class="highscore">8. <span class="h-score"></span></div>
+        <div class="highscore">9. <span class="h-score"></span></div>
+        <div class="highscore">10. <span class="h-score"></span></div>
+      </div>
+    </aside>
   </div>
 
   <script src="scripts/constants.js"></script>
   <script src="scripts/block.js"></script>
   <script src="scripts/game.js"></script>
+  <script src="scripts/highscore.js"></script>
   <script src="scripts/tetris.js"></script>
 </body>
 

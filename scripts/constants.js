@@ -1,6 +1,7 @@
 const gridRows = 20;
 const gridCols = 10;
 const blockLength = 30;
+const fps = 1000 / 30;
 
 const blockShapes = [{
   name: 'iShape',
@@ -39,7 +40,7 @@ const blockShapes = [{
   color: 'red'
 }]
 
-const levelArray = [
+var levelArray = [
   720, // level 0
   640, // level 1
   580, // level 2
