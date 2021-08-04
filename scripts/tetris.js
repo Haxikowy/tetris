@@ -33,6 +33,7 @@ const downTick = () => {
 const gameLoop = () => {
   if (game.gameOver) {
     updateScoreboard();
+    updateUI();
     return
   }
 
@@ -87,12 +88,16 @@ window.addEventListener('keydown', e => {
       }
       break;
     case '+':
-      game.level++;
-      updateUI();
+      if (game.gameOver && game.level >= 0 && game.level + 1 <= 20) {
+        game.level++;
+        updateUI();
+      }
       break;
     case '-':
-      game.level--;
-      updateUI();
+      if (game.gameOver && game.level - 1 >= 0 && game.level <= 20) {
+        game.level--;
+        updateUI();
+      }
       break;
     case 'i':
       console.log('level ', game.level);
@@ -112,8 +117,10 @@ const updateUI = () => {
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
         if (nextBlock.shape[i][j] > 0) {
-          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color;
+          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[1];
           nxtCtx.fillRect(j * 20, i * 20, 20, 20);
+          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[0];
+          nxtCtx.fillRect((j * 20) + 4, (i * 20) + 4, 20 - 8, 20 - 8);
         } else {
           nxtCtx.clearRect(j * 20, i * 20, 20, 20);
         }

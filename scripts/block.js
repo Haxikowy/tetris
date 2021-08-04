@@ -46,8 +46,10 @@ class Block {
     this.shape.map((row, i) => {
       row.map((cell, j) => {
         if (cell > 0) {
-          this.ctx.fillStyle = blockShapes[this.blockShape].color;
+          this.ctx.fillStyle = blockShapes[this.blockShape].color[1];
           this.ctx.fillRect((this.x + j) * blockLength, (this.y + i) * blockLength, blockLength, blockLength);
+          this.ctx.fillStyle = blockShapes[this.blockShape].color[0];
+          this.ctx.fillRect(((this.x + j) * blockLength) + 6, ((this.y + i) * blockLength) + 6, blockLength - 12, blockLength - 12);
         }
       })
     })

@@ -56,8 +56,11 @@ class Game {
           // check if there is a digit assigned to grid cell value
           // and change the color to one that should be
           if (blockShapes[block].digit === this.grid[y][x]) {
-            this.ctx.fillStyle = blockShapes[block].color;
+            this.ctx.fillStyle = blockShapes[block].color[1];
             this.ctx.fillRect(x * blockLength, y * blockLength, blockLength, blockLength);
+            this.ctx.fillStyle = blockShapes[block].color[0];
+            this.ctx.fillRect((x * blockLength) + 6, (y * blockLength) + 6, blockLength - 12, blockLength - 12)
+
           } else if (this.grid[y][x] === 0) {
             // if there is 0 just remove possible square that here was
             this.ctx.clearRect(x * blockLength, y * blockLength, blockLength, blockLength)
