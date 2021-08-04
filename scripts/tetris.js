@@ -117,8 +117,10 @@ const updateUI = () => {
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
         if (nextBlock.shape[i][j] > 0) {
-          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color;
+          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[1];
           nxtCtx.fillRect(j * 20, i * 20, 20, 20);
+          nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[0];
+          nxtCtx.fillRect((j * 20) + 4, (i * 20) + 4, 20 - 8, 20 - 8);
         } else {
           nxtCtx.clearRect(j * 20, i * 20, 20, 20);
         }
