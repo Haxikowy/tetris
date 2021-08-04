@@ -33,6 +33,7 @@ const downTick = () => {
 const gameLoop = () => {
   if (game.gameOver) {
     updateScoreboard();
+    updateUI();
     return
   }
 
@@ -87,12 +88,16 @@ window.addEventListener('keydown', e => {
       }
       break;
     case '+':
-      game.level++;
-      updateUI();
+      if (game.gameOver && game.level >= 0 && game.level + 1 <= 20) {
+        game.level++;
+        updateUI();
+      }
       break;
     case '-':
-      game.level--;
-      updateUI();
+      if (game.gameOver && game.level - 1 >= 0 && game.level <= 20) {
+        game.level--;
+        updateUI();
+      }
       break;
     case 'i':
       console.log('level ', game.level);

@@ -6,10 +6,14 @@
 4. Add handicap option --- if you wanna start on "1" lvl of handicap 1/10 of gameboard will be filled with blocks,[x]
    --- on lvl "2" 2/10 will be filled ->> and further, max lvl on 7,[x]
 5. Add UI:
-   - instruction, how to play etc.,[x]
+   - instruction, how to play etc.,[v]
    - score,[v]
    - his current level,[v]
 6. Add incoming block mechanic[v]
+7. Bugs :
+   -> levels can be changed during the game [v]
+   -> level can be negative(-1 etc.) [x]
+   -> when rotating block sometime collision fucks up [x]
 
 ## Scoring system
 
