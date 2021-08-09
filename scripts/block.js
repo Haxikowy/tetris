@@ -49,7 +49,7 @@ class Block {
           this.ctx.fillStyle = blockShapes[this.blockShape].color[1];
           this.ctx.fillRect((this.x + j) * blockLength, (this.y + i) * blockLength, blockLength, blockLength);
           this.ctx.fillStyle = blockShapes[this.blockShape].color[0];
-          this.ctx.fillRect(((this.x + j) * blockLength) + 6, ((this.y + i) * blockLength) + 6, blockLength - 12, blockLength - 12);
+          this.ctx.fillRect(((this.x + j) * blockLength) + 4, ((this.y + i) * blockLength) + 4, blockLength - 8, blockLength - 8);
         }
       })
     })

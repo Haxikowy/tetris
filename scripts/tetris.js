@@ -33,7 +33,6 @@ const downTick = () => {
 const gameLoop = () => {
   if (game.gameOver) {
     updateScoreboard();
-    updateUI();
     return
   }
 
@@ -120,7 +119,7 @@ const updateUI = () => {
           nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[1];
           nxtCtx.fillRect(j * 20, i * 20, 20, 20);
           nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[0];
-          nxtCtx.fillRect((j * 20) + 4, (i * 20) + 4, 20 - 8, 20 - 8);
+          nxtCtx.fillRect((j * 20) + 2.5, (i * 20) + 2.5, 20 - 5, 20 - 5);
         } else {
           nxtCtx.clearRect(j * 20, i * 20, 20, 20);
         }
