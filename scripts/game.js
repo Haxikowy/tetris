@@ -59,7 +59,7 @@ class Game {
             this.ctx.fillStyle = blockShapes[block].color[1];
             this.ctx.fillRect(x * blockLength, y * blockLength, blockLength, blockLength);
             this.ctx.fillStyle = blockShapes[block].color[0];
-            this.ctx.fillRect((x * blockLength) + 6, (y * blockLength) + 6, blockLength - 12, blockLength - 12)
+            this.ctx.fillRect((x * blockLength) + 4, (y * blockLength) + 4, blockLength - 8, blockLength - 8)
 
           } else if (this.grid[y][x] === 0) {
             // if there is 0 just remove possible square that here was

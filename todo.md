@@ -1,7 +1,7 @@
 # TODO
 
 1. Add score and highscore board [v] -> saving to database (firebase) [x]
-2. Do better graphics, add falling 'shade' [x]
+2. Do better graphics [v], add falling 'shade' [x]
 3. Add score mechanic -> further u are, game gets faster,[v]
 4. Add handicap option:
    -> if you wanna start on "1" lvl of handicap 1/10 of gameboard will be filled with blocks,[x]
