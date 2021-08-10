@@ -9,19 +9,23 @@
 </head>
 
 <body>
+  <header class="logo">
+    <img class="logo_img" src="logo.png" alt="tetris logo">
+  </header>
   <div class="container">
     <aside class="left-container">
-      <canvas id="nxt-block" width="80" height="80"></canvas>
+      <canvas class="tetradic-border" id="nxt-block" width="80" height="80"></canvas>
     </aside>
-    <canvas id="game-window" width="300" height="600">Tetris game window - you should use newer web browser if you see
+    <canvas class="tetradic-border" id="game-window" width="300" height="600">Tetris game window - you should use newer
+      web browser if you see
       it!</canvas>
     <aside class="right-container">
-      <div class="game-state">
+      <div class="game-state tetradic-border">
         <div class="state">Level: <span class="level">0</span></div>
         <div class="state">Lines cleared: <span class="lines">0</span></div>
         <div class="state">Score: <span class="score">0</span></div>
       </div>
-      <div class="highscore-container">
+      <div class="highscore-container tetradic-border">
         <h1 class="scoreboard">scoreboard</h1>
         <div class="highscore">1. <span class="h-score"></span></div>
         <div class="highscore">2. <span class="h-score"></span></div>
@@ -37,11 +41,11 @@
     </aside>
   </div>
 
-  <button class="instruction-btn">instruction</button>
+  <button class="instruction-btn tetradic-border">instruction</button>
 
 
   <div class="instruction-container d-none">
-    <div class="instruction">
+    <div class="instruction tetradic-border">
       <h1>how to play?</h1>
       <p><svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="100" height="100" transform="matrix(-1 0 0 1 110 10)" fill="white" stroke="black"
@@ -105,17 +109,18 @@
           <path d="M205 77L205 87" stroke="black" stroke-width="5" />
         </svg>
         to start a game!</p>
-      <svg class="x-btn" width="30" height="30" viewBox="0 0 142 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="x-btn" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0)">
-          <line x1="35.6447" y1="106.355" x2="106.355" y2="35.6447" stroke="white" stroke-width="20" />
-          <line x1="35.6447" y1="35.6447" x2="106.355" y2="106.355" stroke="white" stroke-width="20" />
+          <line x1="15.0178" y1="0.0177669" x2="0.0177672" y2="15.0178" stroke="black" stroke-width="5" />
+          <line x1="0.0177669" y1="-0.0177669" x2="15.0178" y2="14.9822" stroke="black" stroke-width="5" />
         </g>
         <defs>
           <clipPath id="clip0">
-            <rect width="100" height="100" fill="white" transform="translate(0.289322 71) rotate(-45)" />
+            <rect width="15" height="15" fill="white" />
           </clipPath>
         </defs>
       </svg>
+
 
 
     </div>
