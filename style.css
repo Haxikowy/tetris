@@ -4,7 +4,16 @@
 :root {
   font-family: 'Rajdhani', sans-serif;
   font-size: 20px;
+  --background-clr: hsl(22, 80%, 98%);
   --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --alt-black: hsl(0, 0%, 20%);
+  --cyan: hsl(180, 100%, 50%);
+  --blue: hsl(240, 100%, 50%);
+  --orange: hsl(39, 100%, 50%);
+  --yellow: hsl(60, 100%, 50%);
+  --green: hsl(120, 100%, 50%);
+  --violet: hsl(300, 100%, 30%);  
 }
 
 *,*::before,*::after{
@@ -12,37 +21,46 @@
   margin:0;
   padding: 0;
 }
+.tetradic-border {
+  border-style: solid;
+  border-width: 5px;
+  border-top-color: var(--cyan);
+  border-right-color: var(--violet);
+  border-bottom-color: var(--orange);
+  border-left-color: var(--green);
+}
 
 body{ 
-  background-color: hsl(0, 10%, 20%);
+  background-color: var(--background-clr);
+}
+
+.logo {
+  text-align: center;
 }
 
 .container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 100px 0;
+  align-items: flex-start;
   margin: 0 auto;
   width: 80%;
-  height: 100vh;
 }
 
 .left-container {
   width: 100px;
   height: 610px;
 }
+
 #nxt-block{
   display: block;
   margin: 0 15px 0 auto;
-  background-color: hsl(0, 10%, 5%);
-  border: 5px solid hsl(0, 80%, 20%);
+  background-color: var(--background-clr);
 }
 
 #game-window{
-  background-color: hsl(0, 10%, 5%);
+  background-color: var(--background-clr);
   display: block;
-  border: 5px solid hsl(0, 80%, 20%);
 }
 
 .right-container{  
@@ -53,27 +71,24 @@ body{
 .game-state{
   margin-left: 15px;
   padding: 10px;
-  border: 5px solid hsl(0, 80%, 20%);
-  background-color:hsl(0, 10%, 5%);
+  background-color:var(--background-clr);
   font-weight: bold;
-  color: hsl(0, 80%, 70%);
+  color: var(--black);
 }
 
 .highscore-container{
   margin: 15px 0 0 15px;
   padding: 12px;
-  border: 5px solid hsl(0, 80%, 20%);
-  background-color: hsl(0,10%,5%);
-  color: hsl(0, 80%, 70%);
+  background-color: var(--background-clr);
+  color: var(--alt-black);
   font-weight: bold;
-  /* text-align: center; */
 }
 
 .scoreboard{
   text-transform: uppercase;
   text-align: center;
   font-size: 1.3rem;
-  color:hsl(0, 35%, 90%);
+  color: var(--black);
   margin-bottom: 10px;
 }
 
@@ -81,14 +96,12 @@ body{
   margin-left: 5px;
 }
 
-.instruction-btn {
-  
-font-size: 1.5rem;
-color:hsl(0, 35%, 90%);
-padding: 5px 15px;
-background-color: hsl(0,10%,5%);
-border-radius: 6px;
-border: 3px solid hsl(0, 80%, 20%);
+.instruction-btn {  
+  font-size: 1.5rem;
+  color: var(--black);
+  padding: 5px 30px;
+  background-color: var(--background-clr);
+  border-radius: 6px;
   text-transform: uppercase;
   font-family: inherit;
   font-weight: bold;
@@ -114,8 +127,7 @@ border: 3px solid hsl(0, 80%, 20%);
   left: 50%;
   margin: -200px 0 0 -200px;
   min-width: 400px;
-  background-color: hsl(0, 10%, 5%);
-  border: 5px solid hsl(0, 80%, 20%);
+  background-color: var(--background-clr);
   border-radius: 6px;
   padding: 15px 15px 30px 20px;
   text-transform: uppercase;
@@ -123,7 +135,7 @@ border: 3px solid hsl(0, 80%, 20%);
 
 .instruction h1 {
   text-align: center;
-  color: hsl(0, 0%, 100%);
+  color: var(--black);
 }
 .instruction svg {
   vertical-align: middle;
@@ -132,15 +144,15 @@ border: 3px solid hsl(0, 80%, 20%);
 .instruction p{
   margin-top: 10px;
   margin-left: 5px;
-  color: hsl(0, 35%, 90%);
+  color: var(--alt-black);
   font-weight: bold;
 }
 
 .x-btn {
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right:10px;
+  top: 15px;
+  right:15px;
 }
 
 .d-none{
