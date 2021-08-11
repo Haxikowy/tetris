@@ -14,6 +14,7 @@
   --yellow: hsl(60, 100%, 50%);
   --green: hsl(120, 100%, 50%);
   --violet: hsl(300, 100%, 30%);  
+  --btn-bg: var(--cyan);
 }
 
 *,*::before,*::after{
@@ -54,8 +55,55 @@ body{
 
 #nxt-block{
   display: block;
+  margin: 5px;
+}
+
+/* border animation part */
+.cvs-container {
+  --isAnimated: paused;
+  width: 90px;
+  height: 90px;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   margin: 0 15px 0 auto;
-  background-color: var(--background-clr);
+}
+
+.cvs-container::before {
+  content: '';
+	position: absolute;
+	z-index: -2;
+	left: -50%;
+	top: -50%;
+	width: 200%;
+	height: 200%;
+	background-color: var(--green);
+	background-repeat: no-repeat;
+	background-size: 50% 50%, 50% 50%;
+	background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+	background-image: linear-gradient(var(--green), var(--green)), 
+  linear-gradient(var(--cyan), var(--cyan)), 
+  linear-gradient(var(--violet), var(--violet)), 
+  linear-gradient(var(--orange), var(--orange));
+  transform: rotate(-45deg);
+	animation: spin 4s linear infinite;	
+  animation-play-state: var(--isAnimated);
+}
+.cvs-container::after {
+  content: '';
+	position: absolute;
+	z-index: -1;
+	left: 5px;
+	top: 5px;
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	background: var(--background-clr);
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(315deg);
+  }
 }
 
 #game-window{
@@ -109,6 +157,12 @@ body{
   bottom: 50px;
   right: 100px;
   cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.instruction-btn:hover {
+  background-color: var(--btn-bg);
+  color: var(--background-clr);
 }
 
 .instruction-container{
@@ -153,8 +207,10 @@ body{
   position: absolute;
   top: 15px;
   right:15px;
+  transition: transform .15s ease-in-out;
 }
 
 .d-none{
   display: none;
 }
+

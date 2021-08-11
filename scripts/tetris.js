@@ -32,7 +32,9 @@ const downTick = () => {
 
 const gameLoop = () => {
   if (game.gameOver) {
+    animateBorder();
     updateScoreboard();
+    clearNextBlock();
     return
   }
 
@@ -82,6 +84,7 @@ window.addEventListener('keydown', e => {
     case ' ': // TODO add gameover functionality
       if (game.gameOver) {
         game.gameOver = false;
+        animateBorder();
         gameLoop();
         downTick();
       }
@@ -124,6 +127,14 @@ const updateUI = () => {
           nxtCtx.clearRect(j * 20, i * 20, 20, 20);
         }
       }
+    }
+  }
+}
+
+const clearNextBlock = () => {
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+      nxtCtx.clearRect(j * 20, i * 20, 20, 20);
     }
   }
 }
