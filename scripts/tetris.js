@@ -112,7 +112,7 @@ window.addEventListener('keydown', e => {
 const updateUI = () => {
   levelUI.textContent = game.level;
   linesUI.textContent = game.lineCleared;
-  scoreUI.textContent = game.score;
+  scoreUI.textContent = numberWithSpaces(game.score);
 
   if (!game.gameOver) {
     const nextBlock = game.nextFallingBlock

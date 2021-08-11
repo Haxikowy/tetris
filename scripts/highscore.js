@@ -7,7 +7,11 @@ const updateScoreboard = () => {
 
     scoresArr.sort((a, b) => b - a);
     scores.forEach((score, i) => {
-      score.textContent = scoresArr[i];
+      score.textContent = numberWithSpaces(scoresArr[i]);
     })
   }
+}
+
+function numberWithSpaces(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
