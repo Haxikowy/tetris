@@ -3,8 +3,7 @@ class clearLineEffect {
     this.iterator = 0;
     this.frames = 0;
     this.animationState = true;
-    this.img = new Image(300, 450);
-    this.img.src = 'img/allFrames.png'
+    this.img = document.getElementById('clearEffectIMG');
 
     this.ctx = ctx;
     this.yLine = yLine;
