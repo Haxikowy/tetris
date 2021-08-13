@@ -1,0 +1,29 @@
+@media(max-width: 1440px){
+  .logo-img{
+    height: 18vh;
+  }
+  #nxt-block{
+    width: calc(100% - 10px);
+  }
+  .cvs-container{
+    width: 75px;
+    height: 75px;
+  }
+  #game-window{
+    width: 25%;
+  }
+  .right-container{
+    width: 170px;
+    font-size: .9rem;
+  }
+  .highscore-container{
+    padding: 8px;
+  }
+  .scoreboard {
+    font-size: 1.1rem;
+  }
+  .instruction-btn{
+    font-size: 1.3rem;
+    padding: 5px 20px;
+  }
+}
