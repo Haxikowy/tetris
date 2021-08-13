@@ -9,6 +9,7 @@ class Game {
     this.score = 0; //inital score by every new game is 0
     this.level = 0; //default level is 0
     this.lineCleared = 0; //inital lines cleared set to 0
+    this.clearAnimation = false;
   }
 
   makeGameGrid() {
@@ -50,34 +51,37 @@ class Game {
   }
 
   drawGameState() {
-    for (var y = 0; y < gridRows; y++) {
-      for (var x = 0; x < gridCols; x++) {
-        for (var block = 0; block < 7; block++) {
-          // check if there is a digit assigned to grid cell value
-          // and change the color to one that should be
-          if (blockShapes[block].digit === this.grid[y][x]) {
-            this.ctx.fillStyle = blockShapes[block].color[1];
-            this.ctx.fillRect(x * blockLength, y * blockLength, blockLength, blockLength);
-            this.ctx.fillStyle = blockShapes[block].color[0];
-            this.ctx.fillRect((x * blockLength) + 4, (y * blockLength) + 4, blockLength - 8, blockLength - 8)
 
-          } else if (this.grid[y][x] === 0) {
-            // if there is 0 just remove possible square that here was
-            this.ctx.clearRect(x * blockLength, y * blockLength, blockLength, blockLength)
+    if (!this.clearAnimation) {
+      for (var y = 0; y < gridRows; y++) {
+        for (var x = 0; x < gridCols; x++) {
+          for (var block = 0; block < 7; block++) {
+            // check if there is a digit assigned to grid cell value
+            // and change the color to one that should be
+            if (blockShapes[block].digit === this.grid[y][x]) {
+              this.ctx.fillStyle = blockShapes[block].color[1];
+              this.ctx.fillRect(x * blockLength, y * blockLength, blockLength, blockLength);
+              this.ctx.fillStyle = blockShapes[block].color[0];
+              this.ctx.fillRect((x * blockLength) + 4, (y * blockLength) + 4, blockLength - 8, blockLength - 8)
+
+            } else if (this.grid[y][x] === 0) {
+              // if there is 0 just remove possible square that here was
+              this.ctx.clearRect(x * blockLength, y * blockLength, blockLength, blockLength)
+            }
           }
         }
       }
+      // render block that is currently falling
+      if (this.fallingBlock !== null) {
+        this.fallingBlock.renderBlock();
+      }
+      // look for winning lines after every draw
+      this.checkLines();
     }
-    // render block that is currently falling
-    if (this.fallingBlock !== null) {
-      this.fallingBlock.renderBlock();
-    }
-    // look for winning lines after every draw
-    this.checkLines();
   }
 
   moveDown() {
-    if (this.fallingBlock === null && this.gameOver) {
+    if (this.fallingBlock === null || this.gameOver || this.clearAnimation) {
       this.drawGameState();
       return
     } else if (this.collision(this.fallingBlock.x, this.fallingBlock.y + 1)) {
@@ -112,7 +116,7 @@ class Game {
   }
 
   moveSide(right) {
-    if (this.fallingBlock === null) {
+    if (this.fallingBlock === null || this.clearAnimation) {
       this.drawGameState();
       return
     } else if (right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
@@ -131,7 +135,7 @@ class Game {
     }
   }
   rotate() {
-    if (this.fallingBlock === null || this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
+    if (this.fallingBlock === null || this.clearAnimation || this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
       this.drawGameState();
       return
     } else {
@@ -162,7 +166,12 @@ class Game {
     // and if there are loop through them and
     // blank them
     if (lineIndex.length > 0) {
+      this.clearAnimation = true;
       lineIndex.forEach((e) => {
+        // boom animation
+        this.animateClear(e);
+
+
         this.grid.splice(e, 1)
         this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
       })
@@ -227,5 +236,17 @@ class Game {
     }
     scoreArr.push(this.score);
     localStorage.setItem("scores", JSON.stringify(scoreArr));
+  }
+  animateClear(e) {
+    const clearEffect = new clearLineEffect(this.ctx, e);
+    this.clearAnimation = clearEffect.animationState;
+    const animationInterval = setInterval(() => {
+      if (clearEffect.animationState) {
+        clearEffect.animate()
+      } else {
+        this.clearAnimation = clearEffect.animationState;
+        clearInterval(animationInterval);
+      }
+    }, 3);
   }
 }
