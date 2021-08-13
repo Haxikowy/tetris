@@ -38,6 +38,9 @@ body{
 .logo {
   text-align: center;
 }
+.logo-img{
+  height: 20vh;
+}
 
 .container {
   display: flex;
@@ -214,3 +217,6 @@ body{
   display: none;
 }
 
+#clearEffectIMG {
+  display: none;
+}
