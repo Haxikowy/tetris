@@ -106,6 +106,7 @@ window.addEventListener('keydown', e => {
 });
 
 keyboard.addEventListener('click', e => {
+  e.preventDefault();
   const buttonID = e.target.parentElement.id;
 
   switch (buttonID) {
