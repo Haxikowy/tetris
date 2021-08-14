@@ -133,14 +133,19 @@
 /* /////////////////////////////////////// */
 
   .gameButtons {
+    width: 50vw;
     display: grid;
     margin: 15px 0px 0px 20px;
     grid-template: repeat(2, 1fr)/repeat(3, 1fr);
   }
 
+  .gameButtons button {
+    margin: 3px;
+  }
+
   .gameButtons img {
-    width: 60px;
-    height: 60px;
+    width: 16vw;
+    height: 16vw;
   }
 
   #upperArrow-btn {
