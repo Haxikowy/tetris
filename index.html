@@ -26,7 +26,7 @@
     <aside class="right-container">
       <div class="game-state tetradic-border">
         <div class="state">Level: <span class="level">0</span></div>
-        <div class="state">Lines cleared: <span class="lines">0</span></div>
+        <div class="state">Lines: <span class="lines">0</span></div>
         <div class="state">Score: <span class="score">0</span></div>
       </div>
       <div class="highscore-container tetradic-border">
@@ -47,72 +47,46 @@
 
   <button class="instruction-btn tetradic-border">instruction</button>
 
+  <div class="keyboard">
+    <div class="gameButtons">
+      <button id="upperArrow-btn" class="key"><img src="img/upperArrow.svg" alt="upper arrow picture"></button>
+      <button id="leftArrow-btn" class="key"><img src="img/leftArrow.svg" alt="left arrow picture"></button>
+      <button id="downArrow-btn" class="key"><img src="img/downArrow.svg" alt="down arrow picture"></button>
+      <button id="rightArrow-btn" class="key"><img src="img/rightArrow.svg" alt="right arrow picture"></button>
+    </div>
+
+    <div class="utilityButtons">
+      <button id="plus-btn" class="key"><img src="img/plus.svg" alt="plus button picture"></button>
+      <button id="minus-btn" class="key"><img src="img/minus.svg" alt="minus button picture"></button>
+      <button id="spacebar-btn" class="key"><img id="spacebar-img" src="img/space.svg"
+          alt="spacebar button picture"></button>
+    </div>
+  </div>
 
   <div class="instruction-container d-none">
     <div class="instruction tetradic-border">
       <h1>how to play?</h1>
-      <p><svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" transform="matrix(-1 0 0 1 110 10)" fill="white" stroke="black"
-            stroke-width="15" stroke-linejoin="round" />
-          <rect width="100" height="100" transform="matrix(-1 0 0 1 110 10)" stroke="white" stroke-width="3"
-            stroke-linejoin="round" />
-          <path d="M72.3494 38.5L34.8494 60.1506L72.3494 81.8013L72.3494 38.5Z" fill="black" />
-        </svg>
-
-
-        <svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="100" height="100" fill="white" stroke="black" stroke-width="15"
-            stroke-linejoin="round" />
-          <rect x="10" y="10" width="100" height="100" stroke="white" stroke-width="3" stroke-linejoin="round" />
-          <path d="M47.6506 38.5L85.1506 60.1506L47.6506 81.8013L47.6506 38.5Z" fill="black" />
-        </svg>
+      <p>
+        <img src="img/leftArrow.svg" alt="left arrow pic">
+        <img src="img/rightArrow.svg" alt="right arrow pic">
 
         to move side</p>
-      <p><svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="110" y="10" width="100" height="100" transform="rotate(90 110 10)" fill="white" stroke="black"
-            stroke-width="15" stroke-linejoin="round" />
-          <rect x="110" y="10" width="100" height="100" transform="rotate(90 110 10)" stroke="white" stroke-width="3"
-            stroke-linejoin="round" />
-          <path d="M81.5 47.6506L59.8494 85.1506L38.1987 47.6506L81.5 47.6506Z" fill="black" />
-        </svg>
+      <p>
+        <img src="img/downArrow.svg" alt="down arrow pic">
 
         to move down</p>
-      <p><svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" fill="white" stroke="black"
-            stroke-width="15" stroke-linejoin="round" />
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" stroke="white" stroke-width="3"
-            stroke-linejoin="round" />
-          <path d="M38.5 72.3494L60.1506 34.8494L81.8013 72.3494L38.5 72.3494Z" fill="black" />
-        </svg>
+      <p>
+        <img src="img/upperArrow.svg" alt="upper arrow pic">
         to rotate block</p>
       <p>
-        <svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" fill="white" stroke="black"
-            stroke-width="15" stroke-linejoin="round" />
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" stroke="white" stroke-width="3"
-            stroke-linejoin="round" />
-          <line x1="60" y1="40" x2="60" y2="80" stroke="black" stroke-width="5" />
-          <line x1="40" y1="60" x2="80" y2="60" stroke="black" stroke-width="5" />
-        </svg>
-
-        <svg width="30" height="30" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" fill="white" stroke="black"
-            stroke-width="15" stroke-linejoin="round" />
-          <rect x="10" y="110" width="100" height="100" transform="rotate(-90 10 110)" stroke="white" stroke-width="3"
-            stroke-linejoin="round" />
-          <line x1="40" y1="60" x2="80" y2="60" stroke="black" stroke-width="5" />
-        </svg>
+        <img src="img/plus.svg" alt="plus button picture">
+        <img src="img/minus.svg" alt="minus button picture">
 
         to change level</p>
-      <p><svg width="80" height="30" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="300" height="100" fill="white" stroke="black" stroke-width="15"
-            stroke-linejoin="round" />
-          <rect x="10" y="10" width="300" height="100" stroke="white" stroke-width="3" stroke-linejoin="round" />
-          <line x1="105" y1="84.5" x2="204.668" y2="84.5" stroke="black" stroke-width="5" />
-          <line x1="107.5" y1="77" x2="107.5" y2="87" stroke="black" stroke-width="5" />
-          <path d="M205 77L205 87" stroke="black" stroke-width="5" />
-        </svg>
+      <p>
+        <img src="img/space.svg" alt="spacebar button picture">
         to start a game!</p>
+
       <svg class="x-btn" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0)">
           <line x1="15.0178" y1="0.0177669" x2="0.0177672" y2="15.0178" stroke="black" stroke-width="5" />
@@ -125,10 +99,9 @@
         </defs>
       </svg>
 
-
-
     </div>
   </div>
+
   <img src="img/allFrames.png" id="clearEffectIMG">
   <script src="scripts/constants.js"></script>
   <script src="scripts/block.js"></script>

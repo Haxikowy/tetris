@@ -1,4 +1,4 @@
-@media(max-width: 1440px){
+@media(max-width: 1440px) and (orientation:landscape){
   .logo-img{
     height: 18vh;
   }
@@ -25,5 +25,171 @@
   .instruction-btn{
     font-size: 1.3rem;
     padding: 5px 20px;
+  }
+}
+
+@media(max-width: 450px) and (orientation: portrait){
+  header{
+    padding: .5rem 0;
+  }
+  .logo-img{
+    height: 12vh;
+  }
+  #nxt-block{
+    width: calc(100% - 10px);
+  }
+
+  .container{
+    display: grid;
+    grid-template: repeat(5, 20%) / 60% 40%;
+    width: 100%;
+    max-height: 63vh;
+
+    margin: 0;
+  }
+
+  #game-window{
+    grid-column: 1/2;
+    grid-row: 1/6;
+    width: 215px;
+    justify-self: right;
+  }
+
+  .left-container{
+    width: max-content;
+    height: max-content;
+    justify-self: center;
+    margin: 0;
+    grid-row: 1/3;
+    grid-column: 2/3;
+  }
+
+  .cvs-container{
+    width: 65px;
+    height: 65px;
+    margin: 0;
+  }
+  .right-container{
+    width: max-content;
+    height: max-content;
+    justify-self: center;
+    margin: 0;
+    font-size: .7rem;
+    grid-row: 2/3;
+    grid-column: 2/3;
+  }
+  .game-state{
+    padding: 7px;
+  }
+
+  .highscore-container{
+    padding: 6px;
+  }
+
+  .scoreboard {
+    font-size: .75rem;
+    padding: 0 10px;
+    margin-bottom: 5px;
+  }
+
+  .instruction-btn{
+    font-size: .75rem;
+    padding: 5px 15px;
+    border-width: 3px;
+    bottom: 15px;
+    right: 10px;
+  }
+
+  .instruction {
+    transform: scale(.7);
+  }
+
+/* /////////////////////////////////////// */
+/* ////////////////KEYBOARD/////////////// */
+/* /////////////////////////////////////// */
+
+  .keyboard{
+    display: flex;
+  }
+
+  .key {
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none
+  }
+
+  .key img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .key #spacebar-img {
+    width: 100px;
+  }
+
+/* /////////////////////////////////////// */
+/* //////////////////GAME///////////////// */
+/* /////////////////////////////////////// */
+
+  .gameButtons {
+    display: grid;
+    margin: 15px 0px 0px 20px;
+    grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  }
+
+  .gameButtons img {
+    width: 60px;
+    height: 60px;
+  }
+
+  #upperArrow-btn {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  #leftArrow-btn {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    justify-self: right;
+  }
+  
+  #downArrow-btn {
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+  
+  #rightArrow-btn{
+    grid-column: 3/4;
+    grid-row: 2/3;
+    justify-self: left;
+  }
+
+
+/* /////////////////////////////////////// */
+/* ////////////////UTILITY//////////////// */
+/* /////////////////////////////////////// */
+
+  .utilityButtons{
+    position: absolute;
+    bottom: 55px;
+    right: 10px;
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+  }
+
+  #plus-btn{
+    grid-column: 2/3;
+    grid-row: 1/2;
+  } 
+  
+  #minus-btn{
+    grid-column: 3/4;
+    grid-row: 1/2;
+  }
+  #spacebar-btn {
+    justify-self: right;
+    grid-column: 1/4;
+    grid-row: 2/3;
   }
 }
