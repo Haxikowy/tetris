@@ -117,10 +117,10 @@ body{
 .right-container{  
   width: 200px;
   height: 610px;
+  margin-left: 15px;
 }
 
 .game-state{
-  margin-left: 15px;
   padding: 10px;
   background-color:var(--background-clr);
   font-weight: bold;
@@ -128,7 +128,7 @@ body{
 }
 
 .highscore-container{
-  margin: 15px 0 0 15px;
+  margin-top: 15px;
   padding: 12px;
   background-color: var(--background-clr);
   color: var(--alt-black);
@@ -194,6 +194,7 @@ body{
   text-align: center;
   color: var(--black);
 }
+.instruction img, 
 .instruction svg {
   vertical-align: middle;
 }
@@ -218,5 +219,9 @@ body{
 }
 
 #clearEffectIMG {
+  display: none;
+}
+
+.keyboard {
   display: none;
 }

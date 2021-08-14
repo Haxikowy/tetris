@@ -3,6 +3,7 @@ const nextBlockCanvas = document.getElementById('nxt-block');
 const levelUI = document.querySelector('.level');
 const linesUI = document.querySelector('.lines');
 const scoreUI = document.querySelector('.score');
+const keyboard = document.querySelector('.keyboard');
 
 // check for browser support
 if (gameCanvas.getContext) {
@@ -101,13 +102,51 @@ window.addEventListener('keydown', e => {
         updateUI();
       }
       break;
-    case 'i':
-      console.log('level ', game.level);
-      console.log('cleared ', game.lineCleared);
-      console.log('score ', game.score);
-      break;
   }
 });
+
+keyboard.addEventListener('click', e => {
+  const buttonID = e.target.parentElement.id;
+
+  switch (buttonID) {
+    case 'leftArrow-btn':
+      game.moveSide(false);
+      break;
+    case 'rightArrow-btn':
+      game.moveSide(true);
+      break;
+    case 'downArrow-btn':
+      game.moveDown();
+      if (!game.gameOver) {
+        game.score++
+      }
+      break;
+    case 'upperArrow-btn':
+      game.rotate();
+      break;
+    case 'spacebar-btn': // TODO add gameover functionality
+      if (game.gameOver) {
+        game.gameOver = false;
+        animateBorder();
+        gameLoop();
+        downTick();
+      }
+      break;
+    case 'plus-btn':
+      if (game.gameOver && game.level >= 0 && game.level + 1 <= 20) {
+        game.level++;
+        updateUI();
+      }
+      break;
+    case 'minus-btn':
+      if (game.gameOver && game.level - 1 >= 0 && game.level <= 20) {
+        game.level--;
+        updateUI();
+      }
+      break;
+  }
+})
+
 
 const updateUI = () => {
   levelUI.textContent = game.level;
