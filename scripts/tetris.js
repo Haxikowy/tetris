@@ -1,9 +1,9 @@
-const gameCanvas = document.getElementById('game-window');
-const nextBlockCanvas = document.getElementById('nxt-block');
-const levelUI = document.querySelector('.level');
-const linesUI = document.querySelector('.lines');
-const scoreUI = document.querySelector('.score');
-const keyboard = document.querySelector('.keyboard');
+const gameCanvas = document.getElementById('gameWindow');
+const nextBlockCanvas = document.getElementById('nxtBlock');
+const levelUI = document.querySelector('.csLevel');
+const linesUI = document.querySelector('.csLines');
+const scoreUI = document.querySelector('.csScore');
+const keyboard = document.querySelectorAll('.keyboard');
 
 // check for browser support
 if (gameCanvas.getContext) {
@@ -33,9 +33,9 @@ const downTick = () => {
 
 const gameLoop = () => {
   if (game.gameOver) {
-    animateBorder();
     updateScoreboard();
     clearNextBlock();
+    switchKeyboard();
     return
   }
 
@@ -50,6 +50,7 @@ const gameLoop = () => {
     game.nextFallingBlock = nextBlock;
   }
 
+  switchKeyboard();
   // draw gameGrid
   game.drawGameState();
 
@@ -85,7 +86,6 @@ window.addEventListener('keydown', e => {
     case ' ': // TODO add gameover functionality
       if (game.gameOver) {
         game.gameOver = false;
-        animateBorder();
         gameLoop();
         downTick();
       }
@@ -105,48 +105,47 @@ window.addEventListener('keydown', e => {
   }
 });
 
-keyboard.addEventListener('click', e => {
+keyboard.forEach(keyboard => keyboard.addEventListener('click', e => {
   e.preventDefault();
-  const buttonID = e.target.parentElement.id;
+  const buttonID = e.target.parentElement.parentElement.id;
 
   switch (buttonID) {
-    case 'leftArrow-btn':
+    case 'leftArrow':
       game.moveSide(false);
       break;
-    case 'rightArrow-btn':
+    case 'rightArrow':
       game.moveSide(true);
       break;
-    case 'downArrow-btn':
+    case 'downArrow':
       game.moveDown();
       if (!game.gameOver) {
         game.score++
       }
       break;
-    case 'upperArrow-btn':
+    case 'upArrow':
       game.rotate();
       break;
-    case 'spacebar-btn': // TODO add gameover functionality
+    case 'playBtn': // TODO add gameover functionality
       if (game.gameOver) {
         game.gameOver = false;
-        animateBorder();
         gameLoop();
         downTick();
       }
       break;
-    case 'plus-btn':
+    case 'plusBtn':
       if (game.gameOver && game.level >= 0 && game.level + 1 <= 20) {
         game.level++;
         updateUI();
       }
       break;
-    case 'minus-btn':
+    case 'minusBtn':
       if (game.gameOver && game.level - 1 >= 0 && game.level <= 20) {
         game.level--;
         updateUI();
       }
       break;
   }
-})
+}))
 
 
 const updateUI = () => {

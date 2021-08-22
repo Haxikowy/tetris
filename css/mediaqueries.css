@@ -1,200 +1,131 @@
-@media(max-width: 1440px) and (orientation:landscape){
-  .logo-img{
-    height: 18vh;
+/* z flip */
+@media (max-width: 300px) and (orientation: portrait){
+  .game-window{
+    grid-column: 1/3;
   }
-  #nxt-block{
-    width: calc(100% - 10px);
+  .game-info-container{
+    display: none;
   }
-  .cvs-container{
-    width: 75px;
-    height: 75px;
-  }
-  #game-window{
-    width: 25%;
-  }
-  .right-container{
-    width: 170px;
-    font-size: .9rem;
-  }
-  .highscore-container{
-    padding: 8px;
-  }
-  .scoreboard {
-    font-size: 1.1rem;
-  }
-  .instruction-btn{
-    font-size: 1.3rem;
-    padding: 5px 20px;
+  .scoreboard-container{
+    display: none;
   }
 }
 
-@media(max-width: 450px) and (orientation: portrait){
-  header{
-    padding: .5rem 0;
+/* standard mobile */
+@media (min-width: 375px) and (orientation: portrait){
+  :root {
+    font-size: 14px;
   }
-  .logo-img{
-    height: 12vh;
-  }
-  #nxt-block{
-    width: calc(100% - 10px);
+  .container {
+    padding: 10px;
   }
 
+  .scoreboard, .game-info {
+    padding: 10px;
+  }
+}
+
+/* pixel etc. */
+@media (min-width: 410px) and (orientation: portrait){
+  .container > main {
+    margin-bottom: 15px;
+  }
+  .btn-text{
+    width: 60px;
+    height: 60px;
+  }
+  #instructionBtn {
+    height: 60px;
+  }
+}
+
+/* ipad/pro */
+@media (min-width: 700px){
+  :root{
+    --main-spacing: 15px;
+    font-size: 22px;
+  }
   .container{
-    display: grid;
-    grid-template: repeat(5, 20%) / 60% 40%;
-    width: 100%;
-    max-height: 63vh;
-
-    margin: 0;
+    padding: 20px;
+    max-width: 605px
   }
 
-  #game-window{
-    grid-column: 1/2;
-    grid-row: 1/6;
-    width: 215px;
-    justify-self: right;
+  /* main */
+  main {
+    grid-template-rows: 38% 62%;
   }
-
-  .left-container{
-    width: max-content;
-    height: max-content;
-    justify-self: center;
-    margin: 0;
-    grid-row: 1/3;
-    grid-column: 2/3;
+  .scoreboard, .game-info{
+    padding: 10px 20px;
   }
-
-  .cvs-container{
-    width: 65px;
-    height: 65px;
-    margin: 0;
+  .scoreboard h2 {
+    font-size: 1.1rem;
   }
-  .right-container{
-    width: max-content;
-    height: max-content;
-    justify-self: center;
-    margin: 0;
-    font-size: .7rem;
-    grid-row: 2/3;
-    grid-column: 2/3;
+  .scoreboard ol {
+    margin: 5px 20px 0;
   }
-  .game-state{
-    padding: 7px;
+  /* buttons */
+  section {
+    gap: 15px;
   }
-
-  .highscore-container{
-    padding: 6px;
-  }
-
-  .scoreboard {
-    font-size: .75rem;
-    padding: 0 10px;
-    margin-bottom: 5px;
-  }
-
-  .instruction-btn{
-    font-size: .75rem;
-    padding: 5px 15px;
-    border-width: 3px;
-    bottom: 15px;
-    right: 10px;
-  }
-
-  .instruction {
-    transform: scale(.7);
-  }
-
-/* /////////////////////////////////////// */
-/* ////////////////KEYBOARD/////////////// */
-/* /////////////////////////////////////// */
-
-  .keyboard{
-    display: flex;
-  }
-
-  .key {
-    width: fit-content;
-    height: fit-content;
-    background-color: transparent;
-    border: none
-  }
-
-  .key img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .key #spacebar-img {
+  .btn-text{
     width: 100px;
+    height: 100px;
   }
-
-/* /////////////////////////////////////// */
-/* //////////////////GAME///////////////// */
-/* /////////////////////////////////////// */
-
-  .gameButtons {
-    width: 50vw;
-    display: grid;
-    margin: 15px 0px 0px 20px;
-    grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  #playBtn{
+    width: calc(100% - 220px);
   }
-
-  .gameButtons button {
-    margin: 3px;
+  #plusBtn .btn-text, #minusBtn .btn-text{
+    font-size: 5rem;
   }
-
-  .gameButtons img {
-    width: 16vw;
-    height: 16vw;
-  }
-
-  #upperArrow-btn {
-    grid-column: 2/3;
-    grid-row: 1/2;
-  }
-
-  #leftArrow-btn {
-    grid-column: 1/2;
-    grid-row: 2/3;
-    justify-self: right;
-  }
-  
-  #downArrow-btn {
-    grid-column: 2/3;
-    grid-row: 2/3;
-  }
-  
-  #rightArrow-btn{
-    grid-column: 3/4;
-    grid-row: 2/3;
-    justify-self: left;
-  }
-
-
-/* /////////////////////////////////////// */
-/* ////////////////UTILITY//////////////// */
-/* /////////////////////////////////////// */
-
-  .utilityButtons{
-    position: absolute;
-    bottom: 55px;
-    right: 10px;
-    display: grid;
-    grid-template: repeat(2, 1fr) / repeat(3, 1fr);
-  }
-
-  #plus-btn{
-    grid-column: 2/3;
-    grid-row: 1/2;
+  #instructionBtn {
+    height: 100px;
   } 
-  
-  #minus-btn{
-    grid-column: 3/4;
-    grid-row: 1/2;
+  /* instruction */
+  .instruction-container{
+    top: calc(50% - 175px);
+    left: calc(50% - 225px);
+    width: 450px;
+    height: 350px;
   }
-  #spacebar-btn {
-    justify-self: right;
-    grid-column: 1/4;
-    grid-row: 2/3;
+
+  .instruction .key-img {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+  }
+  .instruction p:last-of-type .key-img{
+    width: 105px
+  }
+}
+
+/* lower resolutions */
+@media (min-width: 1280px) and (max-height: 880px) and (orientation: landscape){
+  :root{
+    font-size: 20px;
+  }
+  
+  .container {
+    padding: 0;
+  }
+
+  .game-window {
+    max-width: 300px;
+  }
+  #instructionBtn {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+
+    width: 200px;
+    height: 60px;
+    padding: 0;
+    font-size: 1rem;
+  }
+}
+
+/* edge case */
+@media (min-width: 1366px) and (orientation: landscape){
+  .game-window{
+    max-width: 310px;
   }
 }
