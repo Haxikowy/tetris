@@ -1,4 +1,4 @@
-const scores = document.querySelectorAll('.h-score');
+const scores = document.querySelectorAll('.highscores li');
 
 const updateScoreboard = () => {
   if (localStorage.getItem('scores')) {
@@ -6,8 +6,11 @@ const updateScoreboard = () => {
     var scoresArr = JSON.parse(storedArr);
 
     scoresArr.sort((a, b) => b - a);
+
     scores.forEach((score, i) => {
-      score.textContent = numberWithSpaces(scoresArr[i]);
+      if (scoresArr[i]) {
+        score.textContent = numberWithSpaces(scoresArr[i]);
+      }
     })
   }
 }

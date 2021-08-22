@@ -1,9 +1,13 @@
 const gradientElements = document.querySelectorAll('.bgp');
 const containerElement = document.querySelector('.container');
-const gameWindowElement = document.querySelector('.game-window');
+const gameWindowElement = document.querySelector('.game-window'),
+  instructionElement = document.querySelector('.instruction-page'),
+  xBtnElement = document.querySelector('.x-btn');
 const gameKeyboard = document.querySelector('.keyboard-game'),
   utilityKeyboard = document.querySelector('.keyboard-utility'),
   instructionBtn = document.getElementById('instructionBtn');
+
+
 
 const displayElements = (visibility, ...elements) => {
   const allElements = [...elements];
@@ -35,25 +39,48 @@ const fixRatio = (element) => {
   element.style.height = element.scrollWidth * 2;
 }
 
-
-addEventListener('DOMContentLoaded', () => {
+const switchKeyboard = () => {
   if (window.innerWidth < 1024 && screen.orientation.type === 'portrait-primary') {
-    displayElements(true, utilityKeyboard, instructionBtn)
+    if (game.gameOver) {
+      displayElements(true, utilityKeyboard, instructionBtn)
+      displayElements(false, gameKeyboard)
+      gradientElements.forEach(element => fixGradient(element, containerElement))
+    }
+    if (!game.gameOver) {
+      displayElements(true, gameKeyboard)
+      displayElements(false, utilityKeyboard, instructionBtn)
+      gradientElements.forEach(element => fixGradient(element, containerElement))
+    }
   } else if (window.innerWidth >= 1024 && screen.orientation.type === 'landscape-primary') {
     displayElements(false, utilityKeyboard, gameKeyboard)
+    gradientElements.forEach(element => fixGradient(element, containerElement))
   }
+}
 
-  gradientElements.forEach(element => fixGradient(element, containerElement))
+addEventListener('DOMContentLoaded', () => {
+  switchKeyboard()
   fixRatio(gameWindowElement);
 })
 
 addEventListener('resize', () => {
-  if (window.innerWidth < 1024 && screen.orientation.type === 'portrait-primary') {
-    displayElements(true, utilityKeyboard)
-  } else if (window.innerWidth >= 1024 && screen.orientation.type === 'landscape-primary') {
-    displayElements(false, utilityKeyboard, gameKeyboard)
-  }
-
-  gradientElements.forEach(element => fixGradient(element, containerElement))
+  switchKeyboard();
   fixRatio(gameWindowElement);
 })
+
+
+
+instructionBtn.addEventListener('click', () => {
+  displayElements(true, instructionElement)
+})
+
+xBtnElement.addEventListener('click', () => {
+  displayElements(false, instructionElement)
+})
+
+xBtnElement.addEventListener('mouseenter', e => {
+  xBtnElement.style.transform = 'scale(1.25)';
+});
+
+xBtnElement.addEventListener('mouseleave', e => {
+  xBtnElement.style.transform = 'scale(1)';
+});
