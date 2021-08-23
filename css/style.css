@@ -170,10 +170,6 @@ main {
   transition: background-position .3s ease-in-out;
 }
 
-.utility-btn:hover, .utility-btn:hover .btn-text{
-  background-position: 0 0 !important;
-}
-
 .btn-content {
   margin: 5px;
   border-radius: 5px;
@@ -219,13 +215,14 @@ main {
   grid-template: 50% 50% / repeat(3, 1fr);
   align-items: center;
   justify-items: center;
-  row-gap: 8px;
+  gap: 3px
 }
 
 .game-btn{
   border: none;
   border-radius: 5px;
-  box-shadow: var(--btn-shadow);
+  width: 100%;
+  height: 100%;
 
   transition: background-position .3s ease-in-out;
 }
@@ -233,10 +230,9 @@ main {
 .game-btn .btn-text {
   font-size: 3rem;
   font-weight: normal;
-}
+  width: 100%;
+  height: calc(100% - 10px)
 
-.game-btn:hover, .game-btn:hover .btn-text{
-  background-position: 0 0 !important;
 }
 
 #upArrow {
@@ -246,7 +242,7 @@ main {
 
 #leftArrow {
   grid-column: 1/2;
-  grid-row: 2/3;
+  grid-row: 1/3;
 }
 
 #downArrow {
@@ -255,7 +251,7 @@ main {
 }
 #rightArrow {
   grid-column: 3/4;
-  grid-row: 2/3;
+  grid-row: 1/3;
 }
 
 /* instruction button */
