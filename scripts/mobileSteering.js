@@ -44,7 +44,6 @@ function touchstart(e) {
             break;
     }
     timer = setInterval(onlongtouch, touchduration);
-    console.log(timer);
 }
 
 function touchend(e) {
@@ -57,8 +56,6 @@ function touchend(e) {
 }
 
 function onlongtouch() {
-    console.log(timer);
-
     switch (buttonID) {
         case 'leftArrow':
             game.moveSide(false);
