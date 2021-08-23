@@ -23,12 +23,19 @@
   .scoreboard, .game-info {
     padding: 10px;
   }
+  .keyboard-game {
+    max-height: 120px;
+  }
 }
 
 /* pixel etc. */
 @media (min-width: 410px) and (orientation: portrait){
   .container > main {
     margin-bottom: 15px;
+  }
+
+  .keyboard-game {
+    max-height: unset;
   }
   .btn-text{
     width: 60px;
@@ -65,6 +72,9 @@
   }
   /* buttons */
   section {
+    gap: 15px;
+  }
+  .keyboard-game {
     gap: 15px;
   }
   .btn-text{
