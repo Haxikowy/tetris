@@ -1,8 +1,10 @@
-var onlongtouch, timer, buttonID;
+var buttonID, timer;
 var touchduration = 120; //length of time we want the user to touch before we do something
 
 function touchstart(e) {
     if (e.cancelable) e.preventDefault();
+    if (timer) clearInterval(timer);
+
     buttonID = e.target.parentElement.parentElement.id;
 
     switch (buttonID) {
@@ -42,9 +44,11 @@ function touchstart(e) {
             break;
     }
     timer = setInterval(onlongtouch, touchduration);
+    console.log(timer);
 }
 
-function touchend() {
+function touchend(e) {
+    e.preventDefault()
     //stops short touches from firing the event
     if (timer) {
         clearInterval(timer);
@@ -53,7 +57,7 @@ function touchend() {
 }
 
 function onlongtouch() {
-    console.log(timer)
+    console.log(timer);
 
     switch (buttonID) {
         case 'leftArrow':
@@ -93,8 +97,12 @@ function onlongtouch() {
     }
 }
 
+function touchmove(e) {
+    e.preventDefault()
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
     keyboards.forEach(keyboard => keyboard.addEventListener("touchstart", touchstart))
     keyboards.forEach(keyboard => keyboard.addEventListener("touchend", touchend))
-    keyboards.forEach(keyboard => keyboard.addEventListener('touchmove', e => e.preventDefault()))
+    keyboards.forEach(keyboard => keyboard.addEventListener('touchmove', touchmove))
 });
