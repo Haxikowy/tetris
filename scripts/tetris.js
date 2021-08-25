@@ -12,6 +12,7 @@ if (gameCanvas.getContext) {
 }
 const game = new Game(ctx);
 
+//fill scoreboard with scores from localStorage
 updateScoreboard();
 
 const rand = (max) => {
@@ -24,6 +25,7 @@ const updateUI = () => {
   scoreUI.textContent = numberWithSpaces(game.score);
 
   if (!game.gameOver) {
+    clearNextBlock();
     const nextBlock = game.nextFallingBlock
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
@@ -32,8 +34,6 @@ const updateUI = () => {
           nxtCtx.fillRect(j * 20, i * 20, 20, 20);
           nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[0];
           nxtCtx.fillRect((j * 20) + 2.5, (i * 20) + 2.5, 20 - 5, 20 - 5);
-        } else {
-          nxtCtx.clearRect(j * 20, i * 20, 20, 20);
         }
       }
     }
@@ -41,11 +41,7 @@ const updateUI = () => {
 }
 
 const clearNextBlock = () => {
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-      nxtCtx.clearRect(j * 20, i * 20, 20, 20);
-    }
-  }
+  nxtCtx.clearRect(0, 0, 80, 80)
 }
 
 
