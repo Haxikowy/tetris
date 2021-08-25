@@ -5,7 +5,7 @@ function touchstart(e) {
     if (e.cancelable) e.preventDefault();
     if (timer) clearInterval(timer);
 
-    buttonID = e.target.parentElement.parentElement.id;
+    buttonID = e.target.dataset.btn;
 
     switch (buttonID) {
         case 'leftArrow':

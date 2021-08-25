@@ -286,6 +286,8 @@ main {
   right: 0;
   bottom: 0;
   background-color: hsla(0, 0%, 0%, 75%);
+  opacity: 1;
+  animation:fade 300ms ease-in-out forwards;
 }
 
 .instruction-container {
@@ -329,4 +331,12 @@ main {
   right: 20px;
   cursor: pointer;
   transition: transform 300ms ease-in-out;
+}
+
+@keyframes fade {
+  from{
+    opacity: 0;
+  }to{
+    opacity: 1;
+  }  
 }
