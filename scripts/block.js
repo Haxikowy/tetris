@@ -3,6 +3,7 @@ class Block {
     this.ctx = ctx;
     this.blockShape = blockShape;
     this.rotation = rotation;
+    this.nextRotation = this.rotation + 1;
 
     this.y = 0;
     this.x = Math.floor(gridCols / 2) - 2;
@@ -15,12 +16,11 @@ class Block {
   decodeShape() {
     this.shape = [];
     this.nextShape = [];
-    let nextRotation = this.rotation + 1;
     if (this.rotation > 3) {
       this.rotation = 0;
     }
-    if (nextRotation > 3) {
-      nextRotation = 0;
+    if (this.nextRotation > 3) {
+      this.nextRotation = 0;
     }
 
     for (var i = 0; i < 4; i++) {
@@ -28,15 +28,15 @@ class Block {
       this.nextShape.push([]);
       for (var j = 0; j < 4; j++) {
         if (blockShapes[this.blockShape].blocks[this.rotation] & (0x8000 >> (i * 4 + j))) {
-          this.shape[this.shape.length - 1].push(blockShapes[this.blockShape].digit);
+          this.shape[i].push(blockShapes[this.blockShape].digit);
         } else {
-          this.shape[this.shape.length - 1].push(0);
+          this.shape[i].push(0);
         }
 
-        if (blockShapes[this.blockShape].blocks[nextRotation] & (0x8000 >> (i * 4 + j))) {
-          this.nextShape[this.nextShape.length - 1].push(blockShapes[this.blockShape].digit);
+        if (blockShapes[this.blockShape].blocks[this.nextRotation] & (0x8000 >> (i * 4 + j))) {
+          this.nextShape[i].push(blockShapes[this.blockShape].digit);
         } else {
-          this.nextShape[this.nextShape.length - 1].push(0);
+          this.nextShape[i].push(0);
         }
       }
     }

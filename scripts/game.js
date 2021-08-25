@@ -34,6 +34,7 @@ class Game {
         if (shape[i][j] > 0) {
           const p = x + j;
           const q = y + i;
+
           // check if cell is in grid field
           if (p >= 0 && p < gridCols && q < gridRows) {
             // check if it's taken already
@@ -53,6 +54,7 @@ class Game {
   drawGameState() {
 
     if (!this.clearAnimation) {
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
       for (var y = 0; y < gridRows; y++) {
         for (var x = 0; x < gridCols; x++) {
           for (var block = 0; block < 7; block++) {
@@ -63,10 +65,6 @@ class Game {
               this.ctx.fillRect(x * blockLength, y * blockLength, blockLength, blockLength);
               this.ctx.fillStyle = blockShapes[block].color[0];
               this.ctx.fillRect((x * blockLength) + 4, (y * blockLength) + 4, blockLength - 8, blockLength - 8)
-
-            } else if (this.grid[y][x] === 0) {
-              // if there is 0 just remove possible square that here was
-              this.ctx.clearRect(x * blockLength, y * blockLength, blockLength, blockLength)
             }
           }
         }
@@ -116,17 +114,14 @@ class Game {
   }
 
   moveSide(right) {
-    if (this.fallingBlock === null || this.clearAnimation) {
-      this.drawGameState();
-      return
-    } else if (right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
+    if (this.fallingBlock === null ||
+      this.clearAnimation ||
+      right && this.collision(this.fallingBlock.x + 1, this.fallingBlock.y) ||
+      !right && this.collision(this.fallingBlock.x - 1, this.fallingBlock.y)) {
       this.drawGameState();
       return
     } else if (right && !this.collision(this.fallingBlock.x + 1, this.fallingBlock.y)) {
       this.fallingBlock.x += 1;
-      this.drawGameState();
-      return
-    } else if (!right && this.collision(this.fallingBlock.x - 1, this.fallingBlock.y)) {
       this.drawGameState();
       return
     } else if (!right && !this.collision(this.fallingBlock.x - 1, this.fallingBlock.y)) {
@@ -134,12 +129,16 @@ class Game {
       this.drawGameState();
     }
   }
+
   rotate() {
-    if (this.fallingBlock === null || this.clearAnimation || this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
+    if (this.fallingBlock === null ||
+      this.clearAnimation ||
+      this.collision(this.fallingBlock.x, this.fallingBlock.y, this.fallingBlock.nextShape)) {
       this.drawGameState();
       return
     } else {
       this.fallingBlock.rotation++;
+      this.fallingBlock.nextRotation++
       this.fallingBlock.decodeShape();
       this.drawGameState();
     }
