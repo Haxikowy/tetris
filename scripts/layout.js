@@ -36,7 +36,7 @@ const fixGradient = (element, container) => {
 };
 
 const fixRatio = element => {
-   element.style.height = element.scrollWidth * 2;
+   element.style.height = `${element.scrollWidth * 2}px`;
 };
 
 const switchKeyboard = () => {
