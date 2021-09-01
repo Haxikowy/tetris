@@ -40,10 +40,7 @@ const fixRatio = element => {
 };
 
 const switchKeyboard = () => {
-   if (
-      window.innerWidth <= 1024 &&
-      screen.orientation.type === 'portrait-primary'
-   ) {
+   if (window.innerWidth <= 1024 && window.innerWidth < window.innerHeight) {
       if (game.gameOver) {
          displayElements(true, utilityKeyboard, instructionBtn);
          displayElements(false, gameKeyboard);
@@ -60,8 +57,7 @@ const switchKeyboard = () => {
       }
    } else if (
       window.innerWidth > 1024 ||
-      (window.innerWidth <= 1024 &&
-         screen.orientation.type === 'landscape-primary')
+      (window.innerWidth <= 1024 && window.innerWidth > window.innerHeight)
    ) {
       displayElements(false, utilityKeyboard, gameKeyboard);
       gradientElements.forEach(element =>
