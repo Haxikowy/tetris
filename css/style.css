@@ -1,346 +1,356 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap');
 
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
 }
 
 :root {
-  /* variables */
-  --gradient: linear-gradient(150deg, hsl(234, 80%, 45%) 0%, hsl(324, 80%, 45%) 100%);
-  --mainbg: hsl(0, 0%, 6%);
-  
-  
-  --blue: hsl(234, 80%, 45%);
-  --pink : hsl(324, 80%, 45%);
-  --drop-shadow: hsl(234, 80%, 11%);
-  --text-white: hsl(0, 100%, 100%);
+   /* variables */
+   --gradient: linear-gradient(
+      150deg,
+      hsl(234, 80%, 45%) 0%,
+      hsl(324, 80%, 45%) 100%
+   );
+   --mainbg: hsl(0, 0%, 6%);
 
-  --btn-shadow: 6px 9px 0 var(--drop-shadow);
+   --blue: hsl(234, 80%, 45%);
+   --pink: hsl(324, 80%, 45%);
+   --drop-shadow: hsl(234, 80%, 11%);
+   --text-white: hsl(0, 100%, 100%);
 
-  --main-spacing: 5px;
+   --btn-shadow: 6px 9px 0 var(--drop-shadow);
 
-  /* global styles */
-  font-size: 12px;
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: bold;
-  color: var(--text-white);
+   --main-spacing: 5px;
+
+   /* global styles */
+   font-size: 12px;
+   font-family: 'Rajdhani', sans-serif;
+   font-weight: bold;
+   color: var(--text-white);
 }
 
 body {
-  background: var(--mainbg);
+   background: var(--mainbg);
 }
 
-.d-none{
-  display: none !important;
+.d-none {
+   display: none !important;
 }
 
 .bgp {
-  background: var(--gradient);
-  background-size: 100vw 100vh;
+   background: var(--gradient);
+   background-size: 100vw 100vh;
 }
 
 /* layout */
 
 .container {
-  max-width: 560px;
-  min-height: 100vh;
-  padding: 0 8px 8px 8px;
-  margin: 0 auto;
+   max-width: 560px;
+   min-height: 100vh;
+   padding: 0 8px 8px 8px;
+   margin: 0 auto;
 }
 
-.container > *{
-  margin-bottom: 7px;
+.container > * {
+   margin-bottom: 7px;
 }
 
-.container > * + * + *{
-  margin-bottom: 0;
+.container > * + * + * {
+   margin-bottom: 0;
 }
 
 /* logo */
 
 .logo {
-  filter: drop-shadow(8px 11px var(--drop-shadow));
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  text-align: center;
-  font-size: 5.5rem;
-  font-weight: 700;
-  line-height: 100%;
+   filter: drop-shadow(8px 11px var(--drop-shadow));
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   text-align: center;
+   font-size: 5.5rem;
+   font-weight: 700;
+   line-height: 100%;
 }
 
 /* main */
 
 main {
-  display: grid;
-  grid-template: 37% 63% / 58% 42%;
+   display: grid;
+   grid-template: 37% 63% / 58% 42%;
 }
 
 .game-window {
-  grid-row: 1/6;
-  grid-column: 1/2;
+   grid-row: 1/6;
+   grid-column: 1/2;
 
-  max-width: 310px;
-  max-height: 610px;
-  margin-right: var(--main-spacing);
+   max-width: 310px;
+   max-height: 610px;
+   margin-right: var(--main-spacing);
 }
 
 #gameWindow {
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  margin: 5px;
-  background: var(--mainbg);
+   width: calc(100% - 10px);
+   height: calc(100% - 10px);
+   margin: 5px;
+   background: var(--mainbg);
 }
 
 .game-info-container {
-  grid-row: 1/2;
-  grid-column: 2/3;
+   grid-row: 1/2;
+   grid-column: 2/3;
 
-  margin-bottom: var(--main-spacing);
+   margin-bottom: var(--main-spacing);
 }
 
-.game-info{
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  margin: 5px;
-  padding: 5px 10px;
-  background: var(--mainbg);
+.game-info {
+   width: calc(100% - 10px);
+   height: calc(100% - 10px);
+   margin: 5px;
+   padding: 5px 10px;
+   background: var(--mainbg);
 }
 
 #nxtBlock {
-  display: block;
-  width: 50%;
-  margin: 0 auto;
+   display: block;
+   width: 50%;
+   margin: 0 auto;
 }
 .game-info p {
-  margin: 4px 0;
+   margin: 4px 0;
 }
 
-.game-info p:first-of-type{
-  margin-top: 8px;
+.game-info p:first-of-type {
+   margin-top: 8px;
 }
 
-.game-info p:last-of-type{
-  margin-bottom: 0;
+.game-info p:last-of-type {
+   margin-bottom: 0;
 }
 
 .scoreboard-container {
-  grid-row: 2/3;
-  grid-column: 2/3;
+   grid-row: 2/3;
+   grid-column: 2/3;
 }
 
 .scoreboard {
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  margin: 5px;
-  background: var(--mainbg);
+   width: calc(100% - 10px);
+   height: calc(100% - 10px);
+   margin: 5px;
+   background: var(--mainbg);
 
-  padding: 5px;
+   padding: 5px;
 }
 
 .scoreboard h2 {
-  font-size: 1.2rem;
-  text-align: center;
-  text-transform: uppercase;
+   font-size: 1.2rem;
+   text-align: center;
+   text-transform: uppercase;
 }
 
 .scoreboard ol {
-  margin: 10px 20px 0;
+   margin: 10px 20px 0;
 }
 
-.scoreboard li+li {
-  margin-top: 3px;
+.scoreboard li + li {
+   margin-top: 3px;
 }
 
 /* keyboard UTILITY */
 
 .keyboard-utility {
-  display: flex;
-  justify-content: center;
-  animation:fade 300ms ease-in-out forwards;
+   display: flex;
+   justify-content: center;
+   animation: fade 300ms ease-in-out forwards;
 }
 
 .utility-btn {
-  border: none;
-  border-radius: 5px;
-  box-shadow: var(--btn-shadow);
-  margin: 5px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: var(--btn-shadow);
+   margin: 5px;
 
-  transition: background-position .3s ease-in-out;
+   transition: background-position 0.3s ease-in-out;
 }
 
 .btn-content {
-  margin: 5px;
-  border-radius: 5px;
-  background: var(--mainbg);
+   margin: 5px;
+   border-radius: 5px;
+   background: var(--mainbg);
 }
 
 .btn-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 
-  width: 40px;
-  height: 40px;
-  
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  
-  font-size: 1.7rem;
-  font-weight: bold;
-  
-  transition: background-position .3s ease-in-out;
+   width: 40px;
+   height: 40px;
+
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+
+   font-size: 1.7rem;
+   font-weight: bold;
+
+   transition: background-position 0.3s ease-in-out;
 }
 
-#plusBtn .btn-text, #minusBtn .btn-text{
-  font-size: 3rem;
+#plusBtn .btn-text,
+#minusBtn .btn-text {
+   font-size: 3rem;
 }
 
-#plusBtn {margin-left: 0;}
+#plusBtn {
+   margin-left: 0;
+}
 #playBtn {
-  margin-right: 0;
-  width: calc(100% - 120px)
+   margin-right: 0;
+   width: calc(100% - 120px);
 }
 
 #playBtn .btn-text {
-  width: 100%;
+   width: 100%;
 }
 
 /* keyboard GAME */
 
-.keyboard-game{
-  display: grid;
-  grid-template: 50% 50% / repeat(3, 1fr);
-  align-items: center;
-  justify-items: center;
-  gap: 3px;
-  animation:fade 300ms ease-in-out forwards;
+.keyboard-game {
+   display: grid;
+   grid-template: 50% 50% / repeat(3, 1fr);
+   align-items: center;
+   justify-items: center;
+   gap: 3px;
+   animation: fade 300ms ease-in-out forwards;
 }
 
-.game-btn{
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
+.game-btn {
+   border: none;
+   border-radius: 5px;
+   width: 100%;
+   height: 100%;
 
-  transition: background-position .3s ease-in-out;
+   transition: background-position 0.3s ease-in-out;
+}
+.game-btn .btn-content {
+   height: calc(100% - 10px);
 }
 
 .game-btn .btn-text {
-  font-size: 3rem;
-  font-weight: normal;
-  width: 100%;
-  height: calc(100% - 10px)
-
+   font-size: 3rem;
+   font-weight: normal;
+   width: 100%;
+   height: 100%;
 }
 
 #upArrow {
-  grid-column: 2/3;
-  grid-row: 1/2;
+   grid-column: 2/3;
+   grid-row: 1/2;
 }
 
 #leftArrow {
-  grid-column: 1/2;
-  grid-row: 1/3;
+   grid-column: 1/2;
+   grid-row: 1/3;
 }
 
 #downArrow {
-  grid-column: 2/3;
-  grid-row: 2/3;
+   grid-column: 2/3;
+   grid-row: 2/3;
 }
 #rightArrow {
-  grid-column: 3/4;
-  grid-row: 1/3;
+   grid-column: 3/4;
+   grid-row: 1/3;
 }
 
 /* instruction button */
 
 #instructionBtn {
-  width: 100%;
-  border: 5px solid var(--blue);
-  border-radius: 5px;
-  margin-top: 6px;
-  padding: 10px 50px;
-  background: none;
-  box-shadow: var(--btn-shadow);
-  
+   width: 100%;
+   border: 5px solid var(--blue);
+   border-radius: 5px;
+   margin-top: 6px;
+   padding: 10px 50px;
+   background: none;
+   box-shadow: var(--btn-shadow);
 
-  font-weight: bold;
-  font-size:1.5rem;
-  color: var(--blue);
+   font-weight: bold;
+   font-size: 1.5rem;
+   color: var(--blue);
 
-  cursor: pointer;
-  transition: .3s ease-in-out;
-  animation:fade 300ms ease-in-out forwards;
+   cursor: pointer;
+   transition: 0.3s ease-in-out;
+   animation: fade 300ms ease-in-out forwards;
 }
 
-#instructionBtn:hover{
-  border-color: var(--pink);
-  color:var(--pink);
+#instructionBtn:hover {
+   border-color: var(--pink);
+   color: var(--pink);
 }
 
 .instruction-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 0%, 0%, 75%);
-  opacity: 1;
-  animation:fade 300ms ease-in-out forwards;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: hsla(0, 0%, 0%, 75%);
+   opacity: 1;
+   animation: fade 300ms ease-in-out forwards;
 }
 
 .instruction-container {
-  position: absolute;
-  top: calc(50% - 150px);
-  left: calc(50% - 150px);
-  width: 300px;
-  height: 300px;
-  border-radius: 5px;
+   position: absolute;
+   top: calc(50% - 150px);
+   left: calc(50% - 150px);
+   width: 300px;
+   height: 300px;
+   border-radius: 5px;
 }
 
 .instruction {
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  margin: 5px;
-  padding: 15px;
-  background-color: var(--mainbg);
-  text-transform: uppercase;
+   width: calc(100% - 10px);
+   height: calc(100% - 10px);
+   margin: 5px;
+   padding: 15px;
+   background-color: var(--mainbg);
+   text-transform: uppercase;
 }
 
 .instruction h1 {
-  text-align: center;
-  margin-bottom: 20px;
+   text-align: center;
+   margin-bottom: 20px;
 }
 
 .instruction p {
-  margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 
 .instruction .key-img {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+   width: 25px;
+   height: 25px;
+   vertical-align: middle;
 }
-.instruction p:last-of-type .key-img{
-  width: 75px
+.instruction p:last-of-type .key-img {
+   width: 75px;
 }
 
 .x-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  transition: transform 300ms ease-in-out;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   cursor: pointer;
+   transition: transform 300ms ease-in-out;
 }
 
 @keyframes fade {
-  from{
-    opacity: 0;
-  }to{
-    opacity: 1;
-  }  
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
 }
