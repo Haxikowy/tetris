@@ -1,188 +1,286 @@
+<!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/mediaqueries.css" />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      />
+      <link rel="shortcut icon" href="img/favicon.png" />
+      <title>Tetris game</title>
+   </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/mediaqueries.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="shortcut icon" href="img/favicon.png" />
-  <title>Tetris game</title>
-</head>
+   <body>
+      <div class="container">
+         <header>
+            <h1 class="logo bgp">TETRIS</h1>
+         </header>
 
-<body>
-  <div class="container">
-    <header>
-      <h1 class="logo bgp">
-        TETRIS
-      </h1>
-    </header>
+         <main>
+            <div class="game-window bgp">
+               <canvas id="gameWindow" width="300" height="600"> </canvas>
+            </div>
 
-    <main>
-      <div class="game-window bgp">
-        <canvas id="gameWindow" width="300" height="600">
-        </canvas>
+            <div class="game-info-container bgp">
+               <div class="game-info">
+                  <canvas id="nxtBlock" width="80" height="80"></canvas>
+                  <p>Level: <span class="csLevel">0</span></p>
+                  <p>Lines: <span class="csLines">0</span></p>
+                  <p>Score: <span class="csScore">0</span></p>
+               </div>
+            </div>
+
+            <div class="scoreboard-container bgp">
+               <div class="scoreboard">
+                  <h2>scoreboard</h2>
+                  <ol class="highscores">
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                     <li>0</li>
+                  </ol>
+               </div>
+            </div>
+         </main>
+
+         <section class="keyboard keyboard-utility">
+            <button id="plusBtn" class="utility-btn bgp" data-btn="plusBtn">
+               <div class="btn-content" data-btn="plusBtn">
+                  <p class="btn-text bgp" data-btn="plusBtn">+</p>
+               </div>
+            </button>
+            <button id="minusBtn" class="utility-btn bgp" data-btn="minusBtn">
+               <div class="btn-content" data-btn="minusBtn">
+                  <p class="btn-text bgp" data-btn="minusBtn">-</p>
+               </div>
+            </button>
+            <button id="playBtn" class="utility-btn bgp" data-btn="playBtn">
+               <div class="btn-content" data-btn="playBtn">
+                  <p class="btn-text bgp" data-btn="playBtn">PLAY</p>
+               </div>
+            </button>
+         </section>
+
+         <section class="keyboard keyboard-game">
+            <button id="upArrow" class="game-btn bgp" data-btn="upArrow">
+               <div class="btn-content" data-btn="upArrow">
+                  <p class="btn-text bgp" data-btn="upArrow">
+                     <i class="fas fa-caret-up" data-btn="upArrow"></i>
+                  </p>
+               </div>
+            </button>
+            <button id="leftArrow" class="game-btn bgp" data-btn="leftArrow">
+               <div class="btn-content" data-btn="leftArrow">
+                  <p class="btn-text bgp" data-btn="leftArrow">
+                     <i class="fas fa-caret-left" data-btn="leftArrow"></i>
+                  </p>
+               </div>
+            </button>
+            <button id="downArrow" class="game-btn bgp" data-btn="downArrow">
+               <div class="btn-content" data-btn="downArrow">
+                  <p class="btn-text bgp" data-btn="downArrow">
+                     <i class="fas fa-caret-down" data-btn="downArrow"></i>
+                  </p>
+               </div>
+            </button>
+            <button id="rightArrow" class="game-btn bgp" data-btn="rightArrow">
+               <div class="btn-content" data-btn="rightArrow">
+                  <p class="btn-text bgp" data-btn="rightArrow">
+                     <i class="fas fa-caret-right" data-btn="rightArrow"></i>
+                  </p>
+               </div>
+            </button>
+         </section>
+         <button id="instructionBtn">INSTRUCTION</button>
+
+         <div class="instruction-page d-none">
+            <div class="instruction-container bgp">
+               <div class="instruction">
+                  <h1>how to play?</h1>
+                  <p>
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <defs>
+                           <linearGradient
+                              id="grad1"
+                              x1="100%"
+                              y1="100%"
+                              x2="0%"
+                              y2="0%"
+                           >
+                              <stop
+                                 offset="0%"
+                                 style="
+                                    stop-color: hsl(234, 80%, 45%);
+                                    stop-opacity: 1;
+                                 "
+                              />
+                              <stop
+                                 offset="100%"
+                                 style="
+                                    stop-color: hsl(324, 80%, 45%);
+                                    stop-opacity: 1;
+                                 "
+                              />
+                           </linearGradient>
+                        </defs>
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM22 7L8 15L22 23V7Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM8 23L22 15L8 7L8 23Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     to move side
+                  </p>
+                  <p>
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM7 8L15 22L23 8H7Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     to move down
+                  </p>
+                  <p>
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM23 22L15 8L7 22H23Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     to rotate block
+                  </p>
+                  <p>
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM13.5 24V16.5H6V13.5H13.5V6H16.5V13.5H24V16.5H16.5V24H13.5Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     <svg
+                        class="key-img"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35496e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM6 16.5H24V13.5H6V16.5Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+
+                     to change level
+                  </p>
+                  <p>
+                     <svg
+                        class="key-img"
+                        width="90"
+                        height="30"
+                        viewBox="0 0 90 30"
+                     >
+                        <path
+                           fill-rule="evenodd"
+                           clip-rule="evenodd"
+                           d="M5 0C2.23858 0 0 2.23858 0 5V25C0 27.7614 2.23858 30 5 30H85C87.7614 30 90 27.7614 90 25V5C90 2.23858 87.7614 0 85 0H5ZM3 22C3 24.7614 5.23858 27 8 27H82C84.7614 27 87 24.7614 87 22V8C87 5.23858 84.7614 3 82 3H8C5.23858 3 3 5.23858 3 8V22ZM31.5 18V21.5H58.5V18H61.5V23V24.5H60H30H28.5V23V18H31.5Z"
+                           fill="url(#grad1)"
+                        />
+                     </svg>
+                     to start a game!
+                  </p>
+
+                  <svg class="x-btn" width="15" height="15" viewBox="0 0 15 15">
+                     <g clip-path="url(#clip0)">
+                        <line
+                           x1="15"
+                           y1="0"
+                           x2="0"
+                           y2="15"
+                           stroke="white"
+                           stroke-width="5"
+                        />
+                        <line
+                           x1="0"
+                           y1="0"
+                           x2="15"
+                           y2="15"
+                           stroke="white"
+                           stroke-width="5"
+                        />
+                     </g>
+                  </svg>
+               </div>
+            </div>
+         </div>
       </div>
 
-      <div class="game-info-container bgp">
-        <div class="game-info">
-          <canvas id="nxtBlock" width="80" height="80"></canvas>
-          <p>Level: <span class="csLevel">0</span></p>
-          <p>Lines: <span class="csLines">0</span></p>
-          <p>Score: <span class="csScore">0</span></p>
-        </div>
-      </div>
+      <img src="img/allFrames.png" id="clearEffectIMG" class="d-none" />
 
-      <div class="scoreboard-container bgp">
-        <div class="scoreboard">
-          <h2>scoreboard</h2>
-          <ol class="highscores">
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-          </ol>
-        </div>
-      </div>
-    </main>
-
-    <section class="keyboard keyboard-utility">
-      <button id="plusBtn" class="utility-btn bgp" data-btn="plusBtn">
-        <div class="btn-content" data-btn="plusBtn">
-          <p class="btn-text bgp" data-btn="plusBtn">+</p>
-        </div>
-      </button>
-      <button id="minusBtn" class="utility-btn bgp" data-btn="minusBtn">
-        <div class="btn-content" data-btn="minusBtn">
-          <p class="btn-text bgp" data-btn="minusBtn">-</p>
-        </div>
-      </button>
-      <button id="playBtn" class="utility-btn bgp" data-btn="playBtn">
-        <div class="btn-content" data-btn="playBtn">
-          <p class="btn-text bgp" data-btn="playBtn">PLAY</p>
-        </div>
-      </button>
-    </section>
-
-    <section class="keyboard keyboard-game">
-      <button id="upArrow" class="game-btn bgp" data-btn="upArrow">
-        <div class="btn-content" data-btn="upArrow">
-          <p class="btn-text bgp" data-btn="upArrow"><i class="fas fa-caret-up" data-btn="upArrow"></i></p>
-        </div>
-      </button>
-      <button id="leftArrow" class="game-btn bgp" data-btn="leftArrow">
-        <div class="btn-content" data-btn="leftArrow">
-          <p class="btn-text bgp" data-btn="leftArrow"><i class="fas fa-caret-left" data-btn="leftArrow"></i></p>
-        </div>
-      </button>
-      <button id="downArrow" class="game-btn bgp" data-btn="downArrow">
-        <div class="btn-content" data-btn="downArrow">
-          <p class="btn-text bgp" data-btn="downArrow"><i class="fas fa-caret-down" data-btn="downArrow"></i></p>
-        </div>
-      </button>
-      <button id="rightArrow" class="game-btn bgp" data-btn="rightArrow">
-        <div class="btn-content" data-btn="rightArrow">
-          <p class="btn-text bgp" data-btn="rightArrow"><i class="fas fa-caret-right" data-btn="rightArrow"></i></p>
-        </div>
-      </button>
-    </section>
-    <button id="instructionBtn">INSTRUCTION</button>
-
-    <div class="instruction-page d-none">
-      <div class="instruction-container bgp">
-        <div class="instruction">
-          <h1>how to play?</h1>
-          <p>
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <defs>
-                <linearGradient id="grad1" x1="100%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" style="stop-color:hsl(234, 80%, 45%);stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:hsl(324, 80%, 45%);stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM22 7L8 15L22 23V7Z"
-                fill="url(#grad1)" />
-            </svg>
-
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM8 23L22 15L8 7L8 23Z"
-                fill="url(#grad1)" />
-            </svg>
-
-
-            to move side</p>
-          <p>
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM7 8L15 22L23 8H7Z"
-                fill="url(#grad1)" />
-            </svg>
-
-
-            to move down</p>
-          <p>
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM23 22L15 8L7 22H23Z"
-                fill="url(#grad1)" />
-            </svg>
-
-            to rotate block</p>
-          <p>
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35497e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM13.5 24V16.5H6V13.5H13.5V6H16.5V13.5H24V16.5H16.5V24H13.5Z"
-                fill="url(#grad1)" />
-            </svg>
-
-            <svg class="key-img" width="30" height="30" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M25 0L4.99999 2.42988e-05C2.23857 2.76538e-05 0 2.23861 0 5.00003V25C0 27.7614 2.23858 30 5 30H25C27.7614 30 30 27.7614 30 25V5C30 2.23857 27.7614 -3.35496e-06 25 0ZM8 2.99999H22C24.7614 2.99999 27 5.23857 27 7.99999V22C27 24.7614 24.7614 27 22 27H8C5.23858 27 3 24.7614 3 22V7.99999C3 5.23857 5.23858 2.99999 8 2.99999ZM6 16.5H24V13.5H6V16.5Z"
-                fill="url(#grad1)" />
-            </svg>
-
-
-            to change level</p>
-          <p>
-            <svg class="key-img" width="90" height="30" viewBox="0 0 90 30">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M5 0C2.23858 0 0 2.23858 0 5V25C0 27.7614 2.23858 30 5 30H85C87.7614 30 90 27.7614 90 25V5C90 2.23858 87.7614 0 85 0H5ZM3 22C3 24.7614 5.23858 27 8 27H82C84.7614 27 87 24.7614 87 22V8C87 5.23858 84.7614 3 82 3H8C5.23858 3 3 5.23858 3 8V22ZM31.5 18V21.5H58.5V18H61.5V23V24.5H60H30H28.5V23V18H31.5Z"
-                fill="url(#grad1)" />
-            </svg>
-            to start a game!</p>
-
-          <svg class="x-btn" width="15" height="15" viewBox="0 0 15 15">
-            <g clip-path="url(#clip0)">
-              <line x1="15" y1="0" x2="0" y2="15" stroke="white" stroke-width="5" />
-              <line x1="0" y1="0" x2="15" y2="15" stroke="white" stroke-width="5" />
-            </g>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <img src="img/allFrames.png" id="clearEffectIMG" class="d-none">
-
-  <script src="scripts/layout.js"></script>
-  <script src="scripts/constants.js"></script>
-  <script src="scripts/block.js"></script>
-  <script src="scripts/game.js"></script>
-  <script src="scripts/highscore.js"></script>
-  <script src="scripts/clearEffect.js"></script>
-  <script src="scripts/tetris.js"></script>
-  <script src="scripts/mobileSteering.js"></script>
-</body>
-
+      <script src="scripts/layout.js"></script>
+      <script src="scripts/constants.js"></script>
+      <script src="scripts/block.js"></script>
+      <script src="scripts/game.js"></script>
+      <script src="scripts/highscore.js"></script>
+      <script src="scripts/clearEffect.js"></script>
+      <script src="scripts/tetris.js"></script>
+      <script src="scripts/mobileSteering.js"></script>
+   </body>
 </html>
