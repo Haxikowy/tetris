@@ -159,6 +159,7 @@ main {
 .keyboard-utility {
   display: flex;
   justify-content: center;
+  animation:fade 300ms ease-in-out forwards;
 }
 
 .utility-btn {
@@ -215,7 +216,8 @@ main {
   grid-template: 50% 50% / repeat(3, 1fr);
   align-items: center;
   justify-items: center;
-  gap: 3px
+  gap: 3px;
+  animation:fade 300ms ease-in-out forwards;
 }
 
 .game-btn{
@@ -272,6 +274,7 @@ main {
 
   cursor: pointer;
   transition: .3s ease-in-out;
+  animation:fade 300ms ease-in-out forwards;
 }
 
 #instructionBtn:hover{
@@ -296,6 +299,7 @@ main {
   left: calc(50% - 150px);
   width: 300px;
   height: 300px;
+  border-radius: 5px;
 }
 
 .instruction {
