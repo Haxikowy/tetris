@@ -15,9 +15,9 @@ const game = new Game(ctx);
 //fill scoreboard with scores from localStorage
 updateScoreboard();
 
-const rand = (max) => {
-  return Math.floor((Math.random() * max));
-}
+const rand = max => {
+  return Math.floor(Math.random() * max);
+};
 
 const updateUI = () => {
   levelUI.textContent = game.level;
@@ -26,42 +26,40 @@ const updateUI = () => {
 
   if (!game.gameOver) {
     clearNextBlock();
-    const nextBlock = game.nextFallingBlock
+    const nextBlock = game.nextFallingBlock;
     for (var i = 0; i < 4; i++) {
       for (var j = 0; j < 4; j++) {
         if (nextBlock.shape[i][j] > 0) {
           nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[1];
           nxtCtx.fillRect(j * 20, i * 20, 20, 20);
           nxtCtx.fillStyle = blockShapes[nextBlock.blockShape].color[0];
-          nxtCtx.fillRect((j * 20) + 2.5, (i * 20) + 2.5, 20 - 5, 20 - 5);
+          nxtCtx.fillRect(j * 20 + 2.5, i * 20 + 2.5, 20 - 5, 20 - 5);
         }
       }
     }
   }
-}
+};
 
 const clearNextBlock = () => {
-  nxtCtx.clearRect(0, 0, 80, 80)
-}
-
+  nxtCtx.clearRect(0, 0, 80, 80);
+};
 
 const downTick = () => {
   if (game.gameOver) {
-    return
+    return;
   }
   // move block down
   game.moveDown();
 
   setTimeout(downTick, levelArray[game.level]);
-}
-
+};
 
 const gameLoop = () => {
   if (game.gameOver) {
     updateScoreboard();
     clearNextBlock();
     switchKeyboard();
-    return
+    return;
   }
 
   // add new falling block if there isn't any
@@ -89,7 +87,7 @@ const gameLoop = () => {
   updateUI();
 
   setTimeout(gameLoop, fps);
-}
+};
 
 // desktop steering
 window.addEventListener('keydown', e => {
@@ -103,7 +101,7 @@ window.addEventListener('keydown', e => {
     case 'ArrowDown':
       game.moveDown();
       if (!game.gameOver) {
-        game.score++
+        game.score++;
       }
       break;
     case 'ArrowUp':
