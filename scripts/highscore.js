@@ -1,20 +1,16 @@
 const scores = document.querySelectorAll('.highscores li');
 
-const updateScoreboard = () => {
-  if (localStorage.getItem('scores')) {
-    var storedArr = localStorage.getItem('scores');
-    var scoresArr = JSON.parse(storedArr);
+const numberWithSpaces = x =>
+  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
-    scoresArr.sort((a, b) => b - a);
+const updateScoreboard = async () => {
+  const scoresArr = await fetchScores();
 
-    scores.forEach((score, i) => {
-      if (scoresArr[i]) {
-        score.textContent = numberWithSpaces(scoresArr[i]);
-      }
-    })
-  }
-}
+  scoresArr.sort((a, b) => b - a);
 
-function numberWithSpaces(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-}
+  scores.forEach((score, i) => {
+    if (scoresArr[i]) {
+      score.textContent = numberWithSpaces(scoresArr[i]);
+    }
+  });
+};
